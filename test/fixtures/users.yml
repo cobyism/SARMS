@@ -6,7 +6,7 @@ one:
   password_salt: MyString
   firstname: MyString
   lastname: MyString
-  status: 
+  status: 1
   is_faculty: false
   is_admin: false
 
@@ -16,6 +16,6 @@ two:
   password_salt: MyString
   firstname: MyString
   lastname: MyString
-  status: 
+  status: 1
   is_faculty: false
   is_admin: false
