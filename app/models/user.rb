@@ -1,4 +1,6 @@
 class User < ActiveRecord::Base
+  has_many :enrollments
+  has_many :faculty_assignments
   attr_accessible :email, :password, :password_confirmation, :firstname, :lastname, :status, :is_faculty, :is_admin
 
   attr_accessor :password

@@ -1,0 +1,25 @@
+<h1>Listing at_risk_events</h1>
+
+<table>
+  <tr>
+    <th>Enrollment</th>
+    <th>Viewed at</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @at_risk_events.each do |at_risk_event| %>
+  <tr>
+    <td><%= at_risk_event.enrollment_id %></td>
+    <td><%= at_risk_event.viewed_at %></td>
+    <td><%= link_to 'Show', at_risk_event %></td>
+    <td><%= link_to 'Edit', edit_at_risk_event_path(at_risk_event) %></td>
+    <td><%= link_to 'Destroy', at_risk_event, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New At risk event', new_at_risk_event_path %>

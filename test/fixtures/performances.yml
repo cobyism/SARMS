@@ -1,0 +1,11 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  enrollment_id: 1
+  assessment_id: 1
+  achieved_mark: 1.5
+
+two:
+  enrollment_id: 1
+  assessment_id: 1
+  achieved_mark: 1.5

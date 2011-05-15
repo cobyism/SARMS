@@ -1,0 +1,13 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  user_id: 1
+  at_risk_event_id: 1
+  response: MyString
+  comment: MyText
+
+two:
+  user_id: 1
+  at_risk_event_id: 1
+  response: MyString
+  comment: MyText

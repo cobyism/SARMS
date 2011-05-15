@@ -1,0 +1,15 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Enrollment:</b>
+  <%= @at_risk_event.enrollment_id %>
+</p>
+
+<p>
+  <b>Viewed at:</b>
+  <%= @at_risk_event.viewed_at %>
+</p>
+
+
+<%= link_to 'Edit', edit_at_risk_event_path(@at_risk_event) %> |
+<%= link_to 'Back', at_risk_events_path %>

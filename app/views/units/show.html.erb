@@ -1,0 +1,30 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Code:</b>
+  <%= @unit.code %>
+</p>
+
+<p>
+  <b>Name:</b>
+  <%= @unit.name %>
+</p>
+
+<p>
+  <b>Begins at:</b>
+  <%= @unit.begins_at %>
+</p>
+
+<p>
+  <b>Ends at:</b>
+  <%= @unit.ends_at %>
+</p>
+
+<p>
+  <b>Term:</b>
+  <%= @unit.term %>
+</p>
+
+
+<%= link_to 'Edit', edit_unit_path(@unit) %> |
+<%= link_to 'Back', units_path %>
