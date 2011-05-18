@@ -1,0 +1,84 @@
+html { font-family: "Lucida Grande", Tahoma, Verdana, Arial, sans-serif; font-size: 12px; }
+body { margin: 0; padding: 0; }
+
+.section { float: left; clear: both; width: 100%; }
+
+table { width: 100%; }
+
+a { color: #00C; }
+
+#legal { text-align: right; }
+
+#header, #nav { background: #333; color: #fff; }
+
+#branding h1 { font-size: 32px; font-weight: bold; font-style: italic; margin: 0; }
+#branding p { margin: 0; }
+#branding { margin: 20px 0px; }
+
+#nav { border-bottom: 4px solid #fc0; }
+.navitem { background: #c00; float: left; width: 100%; }
+.navitem a { color: #fff; float: left; padding: 5px 8px; text-decoration: underline; }
+#nav .current { background: #fc0; }
+#nav .current a { color: #c00; text-decoration: none; }
+
+#userbox { text-align: center; background: #c00; color: #fff; }
+#userbox p { margin: 5px 0px; }
+#userbox a { color: #fc0; text-decoration: underline; }
+
+#flash .notice { border: 2px solid green; background: #3c3; color: #fff; padding: 5px 8px; text-align: center; }
+#flash .alert { border: 2px solid #c00; background: #d22; color: #fff; padding: 5px 8px; text-align: center; }
+#flash { margin: 12px auto; }
+
+#footer { margin-top: 20px; }
+#footer .wrap { border-top: 2px solid #c00; padding-top: 10px; }
+
+
+label { display: block; font-weight: bold; margin: 0 0 5px 0; }
+strong { font-weight: bold; }
+em { font-style: italic; }
+
+dl { margin: 14px 0 20px 0; }
+dt { font-weight: bold; }
+dd { font-size: 18px; margin: 0.25em 0 1em 0; }
+dd p { }
+
+ul li { margin-left: 30px; list-style-position: inside; list-style-type: square; }
+
+div.field, div.actions {
+  margin-bottom: 10px;
+}
+
+.field_with_errors {
+  padding: 2px;
+  background-color: red;
+  display: table;
+}
+
+#error_explanation {
+  width: 450px;
+  border: 2px solid red;
+  padding: 7px;
+  padding-bottom: 0;
+  margin-bottom: 20px;
+  background-color: #f0f0f0;
+}
+
+#error_explanation h2 {
+  text-align: left;
+  font-weight: bold;
+  padding: 5px 5px 5px 15px;
+  font-size: 12px;
+  margin: -7px;
+  margin-bottom: 0px;
+  background-color: #c00;
+  color: #fff;
+}
+
+#error_explanation ul li {
+  font-size: 12px;
+  list-style: square;
+}
+
+.field br { display: none; }
+
+.field_with_errors label { margin: 0px 0px 0px 0px; }
