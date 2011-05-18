@@ -1,0 +1,25 @@
+<%= form_for(@at_risk_event) do |f| %>
+  <% if @at_risk_event.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@at_risk_event.errors.count, "error") %> prohibited this at_risk_event from being saved:</h2>
+
+      <ul>
+      <% @at_risk_event.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :enrollment_id %><br />
+    <%= f.text_field :enrollment_id %>
+  </div>
+  <div class="field">
+    <%= f.label :viewed_at %><br />
+    <%= f.datetime_select :viewed_at %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

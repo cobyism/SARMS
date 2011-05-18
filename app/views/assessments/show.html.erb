@@ -1,0 +1,35 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Unit:</b>
+  <%= @assessment.unit_id %>
+</p>
+
+<p>
+  <b>Name:</b>
+  <%= @assessment.name %>
+</p>
+
+<p>
+  <b>Type:</b>
+  <%= @assessment.type %>
+</p>
+
+<p>
+  <b>Due at:</b>
+  <%= @assessment.due_at %>
+</p>
+
+<p>
+  <b>Total marks:</b>
+  <%= @assessment.total_marks %>
+</p>
+
+<p>
+  <b>Weight:</b>
+  <%= @assessment.weight %>
+</p>
+
+
+<%= link_to 'Edit', edit_assessment_path(@assessment) %> |
+<%= link_to 'Back', assessments_path %>
