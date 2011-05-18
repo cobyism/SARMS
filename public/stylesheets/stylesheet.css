@@ -15,7 +15,7 @@ a { color: #00C; }
 #branding p { margin: 0; }
 #branding { margin: 20px 0px; }
 
-#nav { border-bottom: 4px solid #fc0; }
+#main { border-top: 4px solid #fc0; }
 .navitem { background: #c00; float: left; width: 100%; }
 .navitem a { color: #fff; float: left; padding: 5px 8px; text-decoration: underline; }
 #nav .current { background: #fc0; }
