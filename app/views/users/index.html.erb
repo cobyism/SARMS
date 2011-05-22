@@ -1,13 +1,12 @@
-<h1>Listing users</h1>
+<h1>Users</h1>
+<%= link_to 'New User', new_user_path %>
 
 <table>
   <tr>
+    <th>Name</th>
     <th>Email</th>
-    <th>Firstname</th>
-    <th>Lastname</th>
+    <th>Role</th>
     <th>Status</th>
-    <th>Is faculty</th>
-    <th>Is admin</th>
     <th></th>
     <th></th>
     <th></th>
@@ -15,12 +14,10 @@
 
 <% @users.each do |user| %>
   <tr>
+    <td><%= user.full_name %></td>
     <td><%= user.email %></td>
-    <td><%= user.firstname %></td>
-    <td><%= user.lastname %></td>
+    <td><%= user.role %></td>
     <td><%= user.status %></td>
-    <td><%= user.is_faculty %></td>
-    <td><%= user.is_admin %></td>
     <td><%= link_to 'Show', user %></td>
     <td><%= link_to 'Edit', edit_user_path(user) %></td>
     <% if user.id == current_user.id %>
@@ -34,4 +31,3 @@
 
 <br />
 
-<%= link_to 'New User', new_user_path %>

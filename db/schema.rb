@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110515095110) do
+ActiveRecord::Schema.define(:version => 20110520072244) do
 
   create_table "activities", :force => true do |t|
     t.integer  "unit_id"
@@ -100,11 +100,11 @@ ActiveRecord::Schema.define(:version => 20110515095110) do
     t.string   "password_salt"
     t.string   "firstname"
     t.string   "lastname"
-    t.integer  "status"
     t.boolean  "is_faculty"
     t.boolean  "is_admin"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "is_active",     :default => true
   end
 
 end

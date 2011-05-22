@@ -11,8 +11,8 @@
 
 <% @faculty_assignments.each do |faculty_assignment| %>
   <tr>
-    <td><%= faculty_assignment.user_id %></td>
-    <td><%= faculty_assignment.unit_id %></td>
+    <td><%= faculty_assignment.user_name %></td>
+    <td><%= faculty_assignment.unit_code %> &ndash; <%= faculty_assignment.unit_name %></td>
     <td><%= link_to 'Show', faculty_assignment %></td>
     <td><%= link_to 'Edit', edit_faculty_assignment_path(faculty_assignment) %></td>
     <td><%= link_to 'Destroy', faculty_assignment, :confirm => 'Are you sure?', :method => :delete %></td>

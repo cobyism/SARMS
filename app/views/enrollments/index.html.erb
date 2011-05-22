@@ -11,8 +11,8 @@
 
 <% @enrollments.each do |enrollment| %>
   <tr>
-    <td><%= enrollment.user_id %></td>
-    <td><%= enrollment.unit_id %></td>
+    <td><%= enrollment.user_name %></td>
+    <td><%= enrollment.unit_code %> &ndash; <%= enrollment.unit_name %></td>
     <td><%= link_to 'Show', enrollment %></td>
     <td><%= link_to 'Edit', edit_enrollment_path(enrollment) %></td>
     <td><%= link_to 'Destroy', enrollment, :confirm => 'Are you sure?', :method => :delete %></td>

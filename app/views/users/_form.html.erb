@@ -32,8 +32,8 @@
     <%= f.text_field :lastname %>
   </div>
   <div class="field">
-    <%= f.label :status %><br />
-    <%= f.text_field :status %>
+    <%= f.label :is_active %><br />
+    <%= f.select :is_active, [['Active', true], ['Inactive', false]] %>
   </div>
   <div class="field">
     <%= f.label :is_faculty %><br />

@@ -1,7 +1,7 @@
 class User < ActiveRecord::Base
   has_many :enrollments
   has_many :faculty_assignments
-  attr_accessible :email, :password, :password_confirmation, :firstname, :lastname, :status, :is_faculty, :is_admin
+  attr_accessible :email, :password, :password_confirmation, :firstname, :lastname, :is_active, :is_faculty, :is_admin
 
   attr_accessor :password
   before_save :encrypt_password
@@ -11,10 +11,37 @@ class User < ActiveRecord::Base
   validates_presence_of :email
   validates_uniqueness_of :email
 
+  validates_presence_of :firstname, :lastname, :email
+  validates_format_of :email, :with => /^([^\s]+)((?:[-a-z0-9]\.)[a-z]{2,})$/i
+  validates_inclusion_of :is_admin, :in => %w( false ), :message => "must be false for all students", :if => proc { |user| !user.is_faculty? && user.is_admin? }
+
   named_scope :students, :conditions => { :is_admin => false, :is_faculty => false }
   named_scope :staff, :conditions => { :is_faculty => false }
   named_scope :faculty, :conditions => { :is_admin => false, :is_faculty => true }
-  named_scope :admins, :conditions => { :is_admin => true, :is_faculty => true }
+  named_scope :adminis, :conditions => { :is_admin => true, :is_faculty => true }
+
+
+  def role
+    if self.is_admin
+      "Administrator"
+    elsif self.is_faculty
+      "Faculty"
+    else
+      "Student"
+    end
+  end
+
+  def status
+    if self.is_active?
+      "Active"
+    else
+      "Inactive"
+    end
+  end
+  
+  def full_name
+    "#{self.firstname} #{self.lastname}"
+  end
 
   def self.authenticate(email, password)
     user = find_by_email(email)

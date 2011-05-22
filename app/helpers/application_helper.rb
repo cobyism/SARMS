@@ -3,4 +3,9 @@ module ApplicationHelper
     return 'current' if request.request_uri == test_path
     ''
   end
+
+  def current_if(tab)
+    return 'current' if @controller.controller_name == tab
+    ''
+  end
 end

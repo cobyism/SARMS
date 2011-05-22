@@ -12,6 +12,10 @@ gem 'bcrypt-ruby', :require => "bcrypt"
 gem 'populator'
 gem 'faker'
 
+group :development do
+  gem "rails-erd"
+end
+
 # Use unicorn as the web server
 # gem 'unicorn'
 

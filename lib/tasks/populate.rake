@@ -15,9 +15,9 @@ namespace :db do
       :password_confirmation => "admin",
       # :password_hash => "$2a$10$w3exUK//kO017D6OufJcjuSbo.Wj8RdmsKaiIfbSxwRsZdc3Qk1Cq",
       # :password_salt => "$2a$10$w3exUK//kO017D6OufJcju",
-      :firstname => "Administrator",
-      :lastname => "",
-      :status => 0,
+      :firstname => "System",
+      :lastname => "Administrator",
+      :is_active => true,
       :is_faculty => true,
       :is_admin => true
     )
@@ -39,6 +39,7 @@ namespace :db do
       user.firstname = Faker::Name.first_name
       user.lastname = Faker::Name.last_name
       user.email = Faker::Internet.email
+      user.is_active = true
       user.is_admin = false
       user.is_faculty = false
       user.created_at = 3.years.ago..Time.now
@@ -49,6 +50,7 @@ namespace :db do
       user.firstname = Faker::Name.first_name
       user.lastname = Faker::Name.last_name
       user.email = Faker::Internet.email
+      user.is_active = true
       user.is_admin = false
       user.is_faculty = true
       user.created_at = 3.years.ago..Time.now
@@ -59,6 +61,7 @@ namespace :db do
       user.firstname = Faker::Name.first_name
       user.lastname = Faker::Name.last_name
       user.email = Faker::Internet.email
+      user.is_active = true
       user.is_admin = true
       user.is_faculty = true
       user.created_at = 3.years.ago..Time.now

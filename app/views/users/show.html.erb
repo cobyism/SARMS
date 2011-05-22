@@ -1,45 +1,18 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <b>Email:</b>
-  <%= @user.email %>
-</p>
+<h1><%= "#{@user.firstname} #{@user.lastname}" %></h1>
 
-<p>
-  <b>Password hash:</b>
-  <%= @user.password_hash %>
-</p>
+<dl>
+	<dt>Email</dt>
+    <dd><%= @user.email %></dd>
 
-<p>
-  <b>Password salt:</b>
-  <%= @user.password_salt %>
-</p>
+    <dt>Role</dt>
+	<dd><%= @user.role %></dd>
 
-<p>
-  <b>Firstname:</b>
-  <%= @user.firstname %>
-</p>
+    <dt>Status</dt>
+	<dd><%= @user.status %></dd>
 
-<p>
-  <b>Lastname:</b>
-  <%= @user.lastname %>
-</p>
-
-<p>
-  <b>Status:</b>
-  <%= @user.status %>
-</p>
-
-<p>
-  <b>Is faculty:</b>
-  <%= @user.is_faculty %>
-</p>
-
-<p>
-  <b>Is admin:</b>
-  <%= @user.is_admin %>
-</p>
-
+</dl>
 
 <%= link_to 'Edit', edit_user_path(@user) %> |
 <%= link_to 'Back', users_path %>
