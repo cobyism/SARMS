@@ -33,7 +33,7 @@ namespace :db do
     require 'populator'
     require 'faker'
     
-    [User.where('email != ?', "admin@sarms.com"), Unit, Enrollment, FacultyAssignment].each(&:delete_all)
+    [User.where('email != ?', "admin@sarms.com"), Unit, Enrollment, FacultyAssignment, Activity, Assessment].each(&:delete_all)
     
     User.populate 10 do |user|
       user.firstname = Faker::Name.first_name
@@ -72,9 +72,38 @@ namespace :db do
       unit.code = ["MSC228", "SIT321", "SIT282", "SIT384", "SIT772", "MSC337", "SIT190", "SIT112", "SIT180", "SIT358", "MSC722", "SIT289", "SIT661", "SIT934", "SIT013"]
       unit.name = ["Intro to Subject", "Advanced Subject", "Subject Management", "Zen and the Art of Subject"]
       unit.begins_at = ["1/3/2012".to_datetime, "1/7/2012".to_datetime, "1/11/2012".to_datetime]
+      unit.ends_at = unit.begins_at + 3.months
       unit.term = [1, 2, 3]
       unit.created_at = 2.years.ago..Time.now
       unit.updated_at = unit.created_at..Time.now
+      start_date = unit.created_at
+      weekly = start_date
+      Activity.populate 12 do |activity|
+        activity.unit_id = unit.id
+        activity.name = ["Lecture", "Lecture", "Lecture", "Tutorial"]
+        activity.created_at = start_date
+        activity.updated_at = start_date
+        activity.date = weekly
+        weekly += 1.week
+      end
+      @weight_sum = 0
+      @assessment_count = 1
+      Assessment.populate 2..4 do |assessment|
+        assessment.unit_id = unit.id
+        assessment.name = "Assessment #{@assessment_count}"
+        assessment.category = ["Quiz", "Assignment", "Assignment", "Mid-term"]
+        assessment.total_marks = [10, 15, 45, 60, 80, 120]
+        assessment.weight = [10, 15, 15, 20]
+        @assessment_count += 1
+        @weight_sum += assessment.weight
+      end
+      Assessment.populate 1 do |assessment|
+        assessment.unit_id = unit.id
+        assessment.name = "Final Exam"
+        assessment.category = "Examination"
+        assessment.total_marks = [80, 120, 140, 190, 200]
+        assessment.weight = 100 - @weight_sum
+      end
     end
     
     User.students.each do |student|
@@ -95,7 +124,7 @@ namespace :db do
 
   desc "Populate with test data"
   task :wipe => :environment do
-    [User, Unit, Enrollment, FacultyAssignment].each(&:delete_all)
+    [User, Unit, Enrollment, FacultyAssignment, Activity, Assessment].each(&:delete_all)
   end
 end
 

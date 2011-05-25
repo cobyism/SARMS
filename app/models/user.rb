@@ -16,9 +16,8 @@ class User < ActiveRecord::Base
   validates_inclusion_of :is_admin, :in => %w( false ), :message => "must be false for all students", :if => proc { |user| !user.is_faculty? && user.is_admin? }
 
   named_scope :students, :conditions => { :is_admin => false, :is_faculty => false }
-  named_scope :staff, :conditions => { :is_faculty => false }
   named_scope :faculty, :conditions => { :is_admin => false, :is_faculty => true }
-  named_scope :adminis, :conditions => { :is_admin => true, :is_faculty => true }
+  named_scope :admins, :conditions => { :is_admin => true, :is_faculty => true }
 
 
   def role

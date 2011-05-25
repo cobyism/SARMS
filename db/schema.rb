@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110520072244) do
+ActiveRecord::Schema.define(:version => 20110523214621) do
 
   create_table "activities", :force => true do |t|
     t.integer  "unit_id"
@@ -23,12 +23,12 @@ ActiveRecord::Schema.define(:version => 20110520072244) do
   create_table "assessments", :force => true do |t|
     t.integer  "unit_id"
     t.string   "name"
-    t.string   "type"
     t.datetime "due_at"
     t.float    "total_marks"
     t.float    "weight"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "category"
   end
 
   create_table "at_risk_events", :force => true do |t|

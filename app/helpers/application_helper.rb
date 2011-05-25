@@ -5,7 +5,11 @@ module ApplicationHelper
   end
 
   def current_if(tab)
-    return 'current' if @controller.controller_name == tab
+    section = @controller.controller_name
+    if section == "activities" or section == "assessments" or section == "attendances" or section == "performances"
+      section = "units"
+    end
+    return 'current' if section == tab
     ''
   end
 end

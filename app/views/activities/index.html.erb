@@ -1,5 +1,7 @@
 <h1>Listing activities</h1>
 
+<%= link_to 'New Activity', new_unit_activity_path(@unit) %>
+
 <table>
   <tr>
     <th>Unit</th>
@@ -21,7 +23,3 @@
   </tr>
 <% end %>
 </table>
-
-<br />
-
-<%= link_to 'New Activity', new_activity_path %>

@@ -13,7 +13,10 @@
 
   <div class="field">
     <%= f.label :unit_id %><br />
-    <%= f.text_field :unit_id %>
+	<% @unit = @activity.unit unless @activity.unit.new_record? %>
+	<%= "#{@unit.full_name}, #{@unit.trimester}" %> |
+	<%= link_to "Switch Units", units_path %>
+	<%= hidden_field_tag :unit_id, params[:unit_id] %>
   </div>
   <div class="field">
     <%= f.label :name %><br />

@@ -1,4 +1,6 @@
-<h1>Listing faculty_assignments</h1>
+<h1>Faculty Assignments</h1>
+
+<%= link_to 'New Faculty assignment', new_faculty_assignment_path %>
 
 <table>
   <tr>
@@ -14,13 +16,10 @@
   <tr>
     <td><%= faculty_assignment.user_name %></td>
     <td><%= faculty_assignment.unit_code %> &ndash; <%= faculty_assignment.unit_name %></td>
+	<td><%= faculty_assignment.created_at.to_date %></td>
     <td><%= link_to 'Show', faculty_assignment %></td>
     <td><%= link_to 'Edit', edit_faculty_assignment_path(faculty_assignment) %></td>
     <td><%= link_to 'Destroy', faculty_assignment, :confirm => 'Are you sure?', :method => :delete %></td>
   </tr>
 <% end %>
 </table>
-
-<br />
-
-<%= link_to 'New Faculty assignment', new_faculty_assignment_path %>

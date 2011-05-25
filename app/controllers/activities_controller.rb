@@ -1,4 +1,7 @@
 class ActivitiesController < ApplicationController
+  
+  before_filter :find_activity, :except => [:index, :new, :create]
+  
   # GET /activities
   # GET /activities.xml
   def index
@@ -13,8 +16,6 @@ class ActivitiesController < ApplicationController
   # GET /activities/1
   # GET /activities/1.xml
   def show
-    @activity = Activity.find(params[:id])
-
     respond_to do |format|
       format.html # show.html.erb
       format.xml  { render :xml => @activity }
@@ -34,7 +35,6 @@ class ActivitiesController < ApplicationController
 
   # GET /activities/1/edit
   def edit
-    @activity = Activity.find(params[:id])
   end
 
   # POST /activities
@@ -56,8 +56,6 @@ class ActivitiesController < ApplicationController
   # PUT /activities/1
   # PUT /activities/1.xml
   def update
-    @activity = Activity.find(params[:id])
-
     respond_to do |format|
       if @activity.update_attributes(params[:activity])
         format.html { redirect_to(@activity, :notice => 'Activity was successfully updated.') }
@@ -72,12 +70,17 @@ class ActivitiesController < ApplicationController
   # DELETE /activities/1
   # DELETE /activities/1.xml
   def destroy
-    @activity = Activity.find(params[:id])
     @activity.destroy
 
     respond_to do |format|
-      format.html { redirect_to(activities_url) }
+      format.html { redirect_to(unit_activities_url(@unit)) }
       format.xml  { head :ok }
     end
+  end
+  
+  private
+  
+  def find_activity
+    @activity = Activity.find(params[:id])
   end
 end

@@ -16,6 +16,8 @@ group :development do
   gem "rails-erd"
 end
 
+# gem 'rails-footnotes', '>= 3.7'
+
 # Use unicorn as the web server
 # gem 'unicorn'
 

@@ -1,12 +1,12 @@
-<h1>Listing units</h1>
+<h1>Units</h1>
+
+<%= link_to 'New Unit', new_unit_path %>
 
 <table>
   <tr>
     <th>Code</th>
     <th>Name</th>
-    <th>Begins at</th>
-    <th>Ends at</th>
-    <th>Term</th>
+    <th>Trimester</th>
     <th></th>
     <th></th>
     <th></th>
@@ -16,9 +16,7 @@
   <tr>
     <td><%= unit.code %></td>
     <td><%= unit.name %></td>
-    <td><%= unit.begins_at %></td>
-    <td><%= unit.ends_at %></td>
-    <td><%= unit.term %></td>
+	<td><%= "Trimester #{unit.term}, #{unit.begins_at.year}" %></td>
     <td><%= link_to 'Show', unit %></td>
     <td><%= link_to 'Edit', edit_unit_path(unit) %></td>
     <td><%= link_to 'Destroy', unit, :confirm => 'Are you sure?', :method => :delete %></td>
@@ -26,6 +24,3 @@
 <% end %>
 </table>
 
-<br />
-
-<%= link_to 'New Unit', new_unit_path %>
