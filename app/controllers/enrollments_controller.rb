@@ -4,7 +4,6 @@ class EnrollmentsController < ApplicationController
   before_filter :find_user
   before_filter :find_units, :only => [:new, :edit]
   
-  
   # GET /enrollments
   # GET /enrollments.xml
   def index
@@ -33,7 +32,6 @@ class EnrollmentsController < ApplicationController
   # GET /enrollments/new.xml
   def new
     @enrollment = Enrollment.new
-    @units = Unit.all
 
     respond_to do |format|
       format.html # new.html.erb

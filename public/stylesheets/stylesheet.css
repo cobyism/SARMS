@@ -3,7 +3,7 @@ body { margin: 0; padding: 0; }
 
 .section { float: left; clear: both; width: 100%; }
 
-table { width: 100%; }
+table { width: 100%; border-spacing: 0; }
 
 a { color: #00C; }
 

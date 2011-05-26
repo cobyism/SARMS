@@ -1,5 +1,7 @@
-<h1>New faculty_assignment</h1>
+<div class="trb">
+	<%= link_to 'Cancel', user_faculty_assignments_path(@user), :class => :button %>
+</div>
+
+<h1>Assign <%= @user.full_name %> to a Unit</h1>
 
 <%= render 'form' %>
-
-<%= link_to 'Back', faculty_assignments_path %>

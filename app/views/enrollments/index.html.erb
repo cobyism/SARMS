@@ -15,7 +15,7 @@
 
 <% @enrollments.each do |enrollment| %>
   <tr>
-    <td><%= enrollment.unit_code %> &ndash; <%= enrollment.unit_name %></td>
+    <td><%= enrollment.unit.full_name %></td>
 	<td><%= enrollment.created_at.to_date %></td>
     <td class='actions'>
 		<%= link_to 'View Enrollment', enrollment, :class => :button %>

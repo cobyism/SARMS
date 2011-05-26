@@ -6,7 +6,6 @@ class Enrollment < ActiveRecord::Base
   has_many :notes, :dependent => :destroy
   has_many :performances, :dependent => :destroy
 
-
   validates_presence_of :user_id, :unit_id
   
   def user_name

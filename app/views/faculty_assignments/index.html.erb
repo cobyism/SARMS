@@ -1,10 +1,11 @@
-<h1>Faculty Assignments</h1>
+<div class="trb">
+	<%= link_to 'New Faculty assignment', new_user_faculty_assignment_path(@user), :class => :button %>
+</div>
 
-<%= link_to 'New Faculty assignment', new_faculty_assignment_path %>
+<h1>Faculty Assignments for <%= @user.full_name %></h1>
 
 <table>
   <tr>
-    <th>User</th>
     <th>Unit</th>
 	<th>Date Assigned</th>
     <th></th>
@@ -14,12 +15,12 @@
 
 <% @faculty_assignments.each do |faculty_assignment| %>
   <tr>
-    <td><%= faculty_assignment.user_name %></td>
-    <td><%= faculty_assignment.unit_code %> &ndash; <%= faculty_assignment.unit_name %></td>
+    <td><%= faculty_assignment.unit.full_name %></td>
 	<td><%= faculty_assignment.created_at.to_date %></td>
-    <td><%= link_to 'Show', faculty_assignment %></td>
-    <td><%= link_to 'Edit', edit_faculty_assignment_path(faculty_assignment) %></td>
-    <td><%= link_to 'Destroy', faculty_assignment, :confirm => 'Are you sure?', :method => :delete %></td>
+    <td class='actions'>
+		<%= link_to 'View Faculty Assignment', faculty_assignment, :class => :button %>
+		<%= link_to 'Delete', faculty_assignment, :confirm => 'Are you sure?', :method => :delete, :class => :button %>
+	</td>
   </tr>
 <% end %>
 </table>

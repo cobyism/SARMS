@@ -1,31 +1,29 @@
 <table>
-	<tr>
-		
-
-<% @units.each do |unit| %>
-	<% @enrollment = @user.enrollments.build(:unit_id => unit.id) %>
-	<%= form_for([@user, @enrollment]) do |f| %>
-		<td>
-			<%= unit.full_name %>
-			<%= f.hidden_field :user_id %>
-			<%= f.hidden_field :unit_id %>
-		</td>
-		<td>
-			<%= f.submit 'Create Enrollment', :class => :button %>
-		</td>
+	<% @units.each do |unit| %>
+		<tr>
+			<% @enrollment = @user.enrollments.build(:unit_id => unit.id) %>
+			<%= form_for([@user, @enrollment]) do |f| %>
+				<td>
+					<%= unit.full_name %>
+					<%= f.hidden_field :user_id %>
+					<%= f.hidden_field :unit_id %>
+				</td>
+				<td>
+					<%= f.submit 'Create Enrollment', :class => :button %>
+				</td>
 	
-	  <% if @enrollment.errors.any? %>
-	    <div id="error_explanation">
-	      <h2><%= pluralize(@enrollment.errors.count, "error") %> prohibited this enrollment from being saved:</h2>
+			  <% if @enrollment.errors.any? %>
+			    <div id="error_explanation">
+			      <h2><%= pluralize(@enrollment.errors.count, "error") %> prohibited this enrollment from being saved:</h2>
 
-	      <ul>
-	      <% @enrollment.errors.full_messages.each do |msg| %>
-	        <li><%= msg %></li>
-	      <% end %>
-	      </ul>
-	    </div>
-	  <% end %>
+			      <ul>
+			      <% @enrollment.errors.full_messages.each do |msg| %>
+			        <li><%= msg %></li>
+			      <% end %>
+			      </ul>
+			    </div>
+			  <% end %>
+			<% end %>
+		</tr>
 	<% end %>
-	</tr>
-<% end %>
 </table>
