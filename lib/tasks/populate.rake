@@ -107,15 +107,15 @@ namespace :db do
     end
     
     User.students.each do |student|
-      Enrollment.populate 1..3 do |enrollment|
+      Enrollment.populate 1..4 do |enrollment|
         enrollment.user_id = student.id
         enrollment.unit_id = 1..Unit.all.count
       end
     end
     
-    User.staff.each do |staff|
+    User.faculty.each do |faculty|
       FacultyAssignment.populate 1..2 do |faculty_assignment|
-        faculty_assignment.user_id = staff.id
+        faculty_assignment.user_id = faculty.id
         faculty_assignment.unit_id = 1..Unit.all.count
       end
     end

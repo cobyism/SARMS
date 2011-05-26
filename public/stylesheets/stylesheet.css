@@ -15,7 +15,8 @@ a { color: #00C; }
 #branding p { margin: 0; }
 #branding { margin: 20px 0px; }
 
-#main { border-top: 4px solid #fc0; background: #eee; padding-bottom: 30px;}
+#main { border-top: 4px solid #fc0; background: #eee; padding: 12px 0px 30px; }
+#main .wrap { margin-top: 12px; }
 #primary { background: #fff;}
 #primary .padding { padding: 0px 20px; margin-bottom: 15px;}
 #secondary { background: #fff;}
@@ -31,7 +32,8 @@ a { color: #00C; }
 
 #flash .notice { border: 2px solid green; background: #3c3; color: #fff; padding: 5px 8px; text-align: center; }
 #flash .alert { border: 2px solid #c00; background: #d22; color: #fff; padding: 5px 8px; text-align: center; }
-#flash { margin: 12px auto; }
+body #main div#flash { margin: 0 auto; }
+
 
 #footer { margin-top: 20px; }
 #footer .wrap { border-top: 2px solid #c00; padding-top: 10px; }

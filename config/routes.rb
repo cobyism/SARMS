@@ -29,6 +29,7 @@ SARMS::Application.routes.draw do
   root :to => "dashboard#index"
   resources :users do 
     resources :enrollments, :shallow => true
+    resources :faculty_assignments, :shallow => true
   end
   resources :sessions
 end
