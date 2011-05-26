@@ -1,4 +1,8 @@
-<p id="notice"><%= notice %></p>
+<div class="toprightbox">
+	<%= link_to "Switch Users", users_path, :class => "button" %>
+	<%= link_to "Edit", edit_user_path(@user), :class => "button" %>
+	<%= link_to 'Delete', @user, :confirm => 'Are you sure?', :method => :delete, :class => "button" %>
+</div>
 
 <h1><%= "#{@user.firstname} #{@user.lastname}" %></h1>
 
@@ -14,5 +18,10 @@
 
 </dl>
 
-<%= link_to 'Edit', edit_user_path(@user) %> |
-<%= link_to 'Back', users_path %>
+<% content_for :sidebar do %>
+	<h2>Manage</h2>
+	<ul>
+		<li><%= link_to "Enrollments", user_enrollments_path(@user) %></li>
+		<li><%= link_to "Faculty Assignments", edit_user_path(@user) %></li>
+	</ul>
+<% end %>

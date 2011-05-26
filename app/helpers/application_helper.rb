@@ -12,4 +12,8 @@ module ApplicationHelper
     return 'current' if section == tab
     ''
   end
+  def current_if_scope(scope)
+    return 'current' if params[:scope] == scope
+    ''
+  end
 end

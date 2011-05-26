@@ -1,4 +1,4 @@
 class Activity < ActiveRecord::Base
   belongs_to :unit
-  has_many :attendances
+  has_many :attendances, :dependent => :destroy
 end

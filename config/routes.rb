@@ -27,6 +27,8 @@ SARMS::Application.routes.draw do
   get "sign_out" => "sessions#destroy", :as => "sign_out"
   get "sign_up" => "users#new", :as => "sign_up"
   root :to => "dashboard#index"
-  resources :users
+  resources :users do 
+    resources :enrollments, :shallow => true
+  end
   resources :sessions
 end

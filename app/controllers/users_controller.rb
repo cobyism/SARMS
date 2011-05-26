@@ -5,7 +5,19 @@ class UsersController < ApplicationController
   before_filter :authenticate_user!
 
   def index
-    @users = User.all
+    if params[:scope] == 'students'
+      @users = User.students.all
+      @title = "Students"
+    elsif params[:scope] == 'faculty'
+      @users = User.faculty.all
+      @title = "Faculty"
+    elsif params[:scope] == 'admins'
+      @users = User.admins.all
+      @title = "Administrators"
+    else
+      @users = User.all
+      @title = "All Users"
+    end
 
     respond_to do |format|
       format.html # index.html.erb
@@ -60,10 +72,11 @@ class UsersController < ApplicationController
   # PUT /users/1.xml
   def update
     @user = User.find(params[:id])
+    role = params[:user][:role]
 
     respond_to do |format|
       if @user.update_attributes(params[:user])
-        format.html { redirect_to(@user, :notice => 'User was successfully updated.') }
+        format.html { redirect_to(@user, :notice => "User was successfully updated.#{role}") }
         format.xml  { head :ok }
       else
         format.html { render :action => "edit" }

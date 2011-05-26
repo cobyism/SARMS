@@ -15,7 +15,11 @@ a { color: #00C; }
 #branding p { margin: 0; }
 #branding { margin: 20px 0px; }
 
-#main { border-top: 4px solid #fc0; }
+#main { border-top: 4px solid #fc0; background: #eee; padding-bottom: 30px;}
+#primary { background: #fff;}
+#primary .padding { padding: 0px 20px; margin-bottom: 15px;}
+#secondary { background: #fff;}
+#secondary .padding { padding: 0px 15px; margin-bottom: 15px;}
 .navitem { background: #c00; float: left; width: 100%; }
 .navitem a { color: #fff; float: left; padding: 5px 8px; text-decoration: underline; }
 #nav .current { background: #fc0; }
@@ -42,7 +46,8 @@ dt { font-weight: bold; }
 dd { font-size: 18px; margin: 0.25em 0 1em 0; }
 dd p { }
 
-ul li { margin-left: 30px; list-style-position: inside; list-style-type: square; }
+ul { padding: 0;}
+ul li { margin-left: 15px; list-style-position: inside; list-style-type: square; }
 
 div.field, div.actions {
   margin-bottom: 10px;
@@ -82,3 +87,25 @@ div.field, div.actions {
 .field br { display: none; }
 
 .field_with_errors label { margin: 0px 0px 0px 0px; }
+
+
+button.button, a.button, input[type=submit].button {
+padding: 6px 10px;
+-webkit-border-radius: 2px 2px;
+border: solid 1px rgb(153, 153, 153);
+background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(rgb(255, 255, 255)), to(rgb(221, 221, 221)));
+color: #333;
+text-decoration: none;
+cursor: pointer;
+display: inline-block;
+text-align: center;
+text-shadow: 0px 1px 1px rgba(255,255,255,1);
+line-height: 1;
+}
+
+.separator td { border-top: 1px solid #eee; padding: 5px 0px; }
+td.actions {text-align: right;}
+
+.toprightbox { float: right; }
+
+#secondary h2 { border-bottom: 2px solid #fc0;}

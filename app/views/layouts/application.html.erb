@@ -55,12 +55,24 @@
               <% end %>
 			</div>
 			<div class="wrap container">
-              <%= yield %>
-				<%# <div id="primary" class="grid8 first">%>
-                <%# </div>%>
-				<%# <div id="secondary" class="grid4">%>
-                <%# </div>%>
-				
+				<% if content_for?(:sidebar) %>
+					<div id="primary" class="grid8 first">
+						<div class="padding">
+							<%= yield %>
+						</div>
+                	</div>
+					<div id="secondary" class="grid4">
+						<div class="padding">
+							<%= yield(:sidebar) %>
+						</div>
+                	</div>
+				<% else %>
+					<div id="primary" class="grid12 first">
+						<div class="padding">
+							<%= yield %>
+						</div>
+					</div>
+				<% end %>
 			</div>
 		</div>
 		<div id="footer" class="section">
@@ -74,6 +86,6 @@
 			</div>
 		</div>
 	</div>
+	<%= "Debugging: #{@debug}" %>
 </body>
 </html>
-

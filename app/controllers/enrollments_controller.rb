@@ -3,6 +3,9 @@ class EnrollmentsController < ApplicationController
   # GET /enrollments.xml
   def index
     @enrollments = Enrollment.all
+    if params[:user_id]
+      @enrollments = User.find(params[:user_id]).enrollments
+    end
 
     respond_to do |format|
       format.html # index.html.erb

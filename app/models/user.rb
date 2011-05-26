@@ -1,6 +1,6 @@
 class User < ActiveRecord::Base
-  has_many :enrollments
-  has_many :faculty_assignments
+  has_many :enrollments, :dependent => :destroy
+  has_many :faculty_assignments, :dependent => :destroy
   attr_accessible :email, :password, :password_confirmation, :firstname, :lastname, :is_active, :is_faculty, :is_admin
 
   attr_accessor :password
@@ -34,7 +34,7 @@ class User < ActiveRecord::Base
     if self.is_active?
       "Active"
     else
-      "Inactive"
+      "Suspended"
     end
   end
   
