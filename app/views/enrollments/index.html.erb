@@ -1,10 +1,11 @@
-<h1>Enrollments for <%= @user.full_name %></h1>
+<div class="trb">
+	<%= link_to 'New Enrollment', new_user_enrollment_path(@user), :class => :button %>
+</div>
 
-<%= link_to 'New Enrollment', new_user_enrollment_path(@user) %>
+<h1>Enrollments for <%= @user.full_name %></h1>
 
 <table>
   <tr>
-    <th>User</th>
     <th>Unit</th>
 	<th>Date Enrolled</th>
     <th></th>
@@ -14,12 +15,12 @@
 
 <% @enrollments.each do |enrollment| %>
   <tr>
-    <td><%= enrollment.user_name %></td>
     <td><%= enrollment.unit_code %> &ndash; <%= enrollment.unit_name %></td>
 	<td><%= enrollment.created_at.to_date %></td>
-    <td><%= link_to 'Show', enrollment %></td>
-    <td><%= link_to 'Edit', edit_enrollment_path(enrollment) %></td>
-    <td><%= link_to 'Destroy', enrollment, :confirm => 'Are you sure?', :method => :delete %></td>
+    <td class='actions'>
+		<%= link_to 'View Enrollment', enrollment, :class => :button %>
+		<%= link_to 'Delete', enrollment, :confirm => 'Are you sure?', :method => :delete, :class => :button %>
+	</td>
   </tr>
 <% end %>
 </table>

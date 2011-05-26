@@ -4,14 +4,14 @@
 
 <% @units.each do |unit| %>
 	<% @enrollment = @user.enrollments.build(:unit_id => unit.id) %>
-	<%= form_for(@enrollment) do |f| %>
+	<%= form_for([@user, @enrollment]) do |f| %>
 		<td>
 			<%= unit.full_name %>
 			<%= f.hidden_field :user_id %>
 			<%= f.hidden_field :unit_id %>
 		</td>
 		<td>
-			<%= f.submit 'Create Enrollment', :class => "button" %>
+			<%= f.submit 'Create Enrollment', :class => :button %>
 		</td>
 	
 	  <% if @enrollment.errors.any? %>

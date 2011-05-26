@@ -41,10 +41,6 @@ class EnrollmentsController < ApplicationController
     end
   end
 
-  # GET /enrollments/1/edit
-  def edit
-  end
-
   # POST /enrollments
   # POST /enrollments.xml
   def create
@@ -52,25 +48,10 @@ class EnrollmentsController < ApplicationController
 
     respond_to do |format|
       if @enrollment.save
-        format.html { redirect_to(@enrollment, :notice => 'Enrollment was successfully created.') }
+        format.html { redirect_to(user_enrollments_url(@user), :notice => 'Enrollment was successfully created.') }
         format.xml  { render :xml => @enrollment, :status => :created, :location => @enrollment }
       else
         format.html { render :action => "new" }
-        format.xml  { render :xml => @enrollment.errors, :status => :unprocessable_entity }
-      end
-    end
-  end
-
-  # PUT /enrollments/1
-  # PUT /enrollments/1.xml
-  def update
-
-    respond_to do |format|
-      if @enrollment.update_attributes(params[:enrollment])
-        format.html { redirect_to(@enrollment, :notice => 'Enrollment was successfully updated.') }
-        format.xml  { head :ok }
-      else
-        format.html { render :action => "edit" }
         format.xml  { render :xml => @enrollment.errors, :status => :unprocessable_entity }
       end
     end
@@ -82,7 +63,7 @@ class EnrollmentsController < ApplicationController
     @enrollment.destroy
 
     respond_to do |format|
-      format.html { redirect_to(enrollments_url) }
+      format.html { redirect_to(user_enrollments_url(@user), :notice => 'Enrollment was successfully deleted.') }
       format.xml  { head :ok }
     end
   end

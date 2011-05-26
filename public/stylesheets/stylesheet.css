@@ -106,6 +106,6 @@ line-height: 1;
 .separator td { border-top: 1px solid #eee; padding: 5px 0px; }
 td.actions {text-align: right;}
 
-.toprightbox { float: right; }
+.trb { float: right; }
 
 #secondary h2 { border-bottom: 2px solid #fc0;}

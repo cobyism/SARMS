@@ -1,7 +1,7 @@
-<div class="toprightbox">
-	<%= link_to "Switch Users", users_path, :class => "button" %>
-	<%= link_to "Edit", edit_user_path(@user), :class => "button" %>
-	<%= link_to 'Delete', @user, :confirm => 'Are you sure?', :method => :delete, :class => "button" %>
+<div class="trb">
+	<%= link_to "Switch Users", users_path, :class => :button %>
+	<%= link_to "Edit", edit_user_path(@user), :class => :button %>
+	<%= link_to 'Delete', @user, :confirm => 'Are you sure?', :method => :delete, :class => :button %>
 </div>
 
 <h1><%= "#{@user.firstname} #{@user.lastname}" %></h1>

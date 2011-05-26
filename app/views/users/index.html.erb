@@ -1,5 +1,5 @@
-<div class="toprightbox">
-	<%= link_to 'New User', new_user_path, :class => "button" %>
+<div class="trb">
+	<%= link_to 'New User', new_user_path, :class => :button %>
 </div>
 
 <h1><%= @title %></h1>
@@ -20,8 +20,8 @@
 		<td class="actions">
 			
 			<% if user.id != current_user.id %>
-				<%= link_to 'Edit', edit_user_path(user), :class => "button" %>
-				<%= link_to 'Delete', user, :confirm => 'Are you sure?', :method => :delete, :class => "button" %>
+				<%= link_to 'Edit', edit_user_path(user), :class => :button %>
+				<%= link_to 'Delete', user, :confirm => 'Are you sure?', :method => :delete, :class => :button %>
 			<% else %>
 				That&rsquo;s you!
 		    <% end %>
