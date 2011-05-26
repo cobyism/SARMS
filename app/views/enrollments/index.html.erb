@@ -1,6 +1,6 @@
-<h1>Enrollments</h1>
+<h1>Enrollments for <%= @user.full_name %></h1>
 
-<%= link_to 'New Enrollment', new_enrollment_path %>
+<%= link_to 'New Enrollment', new_user_enrollment_path(@user) %>
 
 <table>
   <tr>

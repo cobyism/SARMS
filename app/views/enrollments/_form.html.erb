@@ -1,25 +1,31 @@
-<%= form_for(@enrollment) do |f| %>
-  <% if @enrollment.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@enrollment.errors.count, "error") %> prohibited this enrollment from being saved:</h2>
+<table>
+	<tr>
+		
 
-      <ul>
-      <% @enrollment.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
+<% @units.each do |unit| %>
+	<% @enrollment = @user.enrollments.build(:unit_id => unit.id) %>
+	<%= form_for(@enrollment) do |f| %>
+		<td>
+			<%= unit.full_name %>
+			<%= f.hidden_field :user_id %>
+			<%= f.hidden_field :unit_id %>
+		</td>
+		<td>
+			<%= f.submit 'Create Enrollment', :class => "button" %>
+		</td>
+	
+	  <% if @enrollment.errors.any? %>
+	    <div id="error_explanation">
+	      <h2><%= pluralize(@enrollment.errors.count, "error") %> prohibited this enrollment from being saved:</h2>
 
-  <div class="field">
-    <%= f.label :user_id %><br />
-    <%= f.text_field :user_id %>
-  </div>
-  <div class="field">
-    <%= f.label :unit_id %><br />
-    <%= f.text_field :unit_id %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
+	      <ul>
+	      <% @enrollment.errors.full_messages.each do |msg| %>
+	        <li><%= msg %></li>
+	      <% end %>
+	      </ul>
+	    </div>
+	  <% end %>
+	<% end %>
+	</tr>
 <% end %>
+</table>

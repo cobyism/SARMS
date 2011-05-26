@@ -1,10 +1,16 @@
 class EnrollmentsController < ApplicationController
+  
+  before_filter :find_enrollment, :except => [:index, :new, :create]
+  before_filter :find_user
+  before_filter :find_units, :only => [:new, :edit]
+  
+  
   # GET /enrollments
   # GET /enrollments.xml
   def index
     @enrollments = Enrollment.all
     if params[:user_id]
-      @enrollments = User.find(params[:user_id]).enrollments
+      @enrollments = @user.enrollments
     end
 
     respond_to do |format|
@@ -16,7 +22,6 @@ class EnrollmentsController < ApplicationController
   # GET /enrollments/1
   # GET /enrollments/1.xml
   def show
-    @enrollment = Enrollment.find(params[:id])
 
     respond_to do |format|
       format.html # show.html.erb
@@ -28,6 +33,7 @@ class EnrollmentsController < ApplicationController
   # GET /enrollments/new.xml
   def new
     @enrollment = Enrollment.new
+    @units = Unit.all
 
     respond_to do |format|
       format.html # new.html.erb
@@ -37,7 +43,6 @@ class EnrollmentsController < ApplicationController
 
   # GET /enrollments/1/edit
   def edit
-    @enrollment = Enrollment.find(params[:id])
   end
 
   # POST /enrollments
@@ -59,7 +64,6 @@ class EnrollmentsController < ApplicationController
   # PUT /enrollments/1
   # PUT /enrollments/1.xml
   def update
-    @enrollment = Enrollment.find(params[:id])
 
     respond_to do |format|
       if @enrollment.update_attributes(params[:enrollment])
@@ -75,12 +79,33 @@ class EnrollmentsController < ApplicationController
   # DELETE /enrollments/1
   # DELETE /enrollments/1.xml
   def destroy
-    @enrollment = Enrollment.find(params[:id])
     @enrollment.destroy
 
     respond_to do |format|
       format.html { redirect_to(enrollments_url) }
       format.xml  { head :ok }
+    end
+  end
+  
+  private
+  
+  def find_enrollment
+    @enrollment = Enrollment.find(params[:id])
+  end
+  
+  def find_units
+    @units = Unit.all
+  end
+  
+  def find_user
+    if params[:user_id]
+      @user = User.find(params[:user_id])
+    else
+      if params[:id]
+        @user = @enrollment.user
+      else
+        @user = nil
+      end
     end
   end
 end
