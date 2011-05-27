@@ -23,18 +23,11 @@
 				<%= link_to 'Delete', user, :confirm => 'Are you sure?', :method => :delete, :class => :button %>
 			<% else %>
 				That&rsquo;s you!
+				<%= link_to 'Edit', edit_user_path(user), :class => :button %>
 		    <% end %>
 		</td>
 	</tr>
 	<% end %>
 </table>
 
-<% content_for :sidebar do %>
-	<h2>Filter Users</h2>
-	<ul>
-		<li><%= link_to "All Users", users_path %></li>
-		<li><%= link_to "Students", users_path(:scope => "students") %></li>
-		<li><%= link_to "Faculty", users_path(:scope => "faculty") %></li>
-		<li><%= link_to "Administrators", users_path(:scope => "admins") %>	</li>
-	</ul>
-<% end %>
+<%= render :partial => 'index_sidebar' %>

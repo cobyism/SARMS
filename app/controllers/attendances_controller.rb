@@ -19,8 +19,6 @@ class AttendancesController < ApplicationController
   # GET /attendances/1
   # GET /attendances/1.xml
   def show
-    @attendance = Attendance.find(params[:id])
-
     respond_to do |format|
       format.html # show.html.erb
       format.xml  { render :xml => @attendance }
@@ -40,7 +38,6 @@ class AttendancesController < ApplicationController
 
   # GET /attendances/1/edit
   def edit
-    @attendance = Attendance.find(params[:id])
   end
 
   # POST /attendances
@@ -62,8 +59,6 @@ class AttendancesController < ApplicationController
   # PUT /attendances/1
   # PUT /attendances/1.xml
   def update
-    @attendance = Attendance.find(params[:id])
-
     respond_to do |format|
       if @attendance.update_attributes(params[:attendance])
         format.html { redirect_to(@attendance, :notice => 'Attendance was successfully updated.') }
@@ -78,7 +73,6 @@ class AttendancesController < ApplicationController
   # DELETE /attendances/1
   # DELETE /attendances/1.xml
   def destroy
-    @attendance = Attendance.find(params[:id])
     @attendance.destroy
 
     respond_to do |format|

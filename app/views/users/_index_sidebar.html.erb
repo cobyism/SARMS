@@ -1,0 +1,9 @@
+<% content_for :sidebar do %>
+	<h2>Filter Users</h2>
+	<ul>
+		<li><%= link_to "All Users", users_path %></li>
+		<li><%= link_to "Students", users_path(:scope => "students") %></li>
+		<li><%= link_to "Faculty", users_path(:scope => "faculty") %></li>
+		<li><%= link_to "Administrators", users_path(:scope => "admins") %>	</li>
+	</ul>
+<% end %>
