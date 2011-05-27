@@ -1,0 +1,11 @@
+<% content_for :sidebar do %>
+	<h2><%= @user.full_name %></h2>
+	<ul>
+		<li><%= link_to "User Details", @user %></li>
+		<li><%= link_to "Enrollments", user_enrollments_path(@user) %></li>
+		<li><%= link_to "Faculty Assignments", user_faculty_assignments_path(@user) %></li>
+	</ul>
+	<h2>Actions</h2>
+	<%= link_to "Switch Users", users_path, :class => :button %>
+	<%= link_to 'Delete User', @user, :confirm => 'Are you sure?', :method => :delete, :class => :button %>
+<% end %>

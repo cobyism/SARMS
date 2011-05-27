@@ -91,7 +91,7 @@ div.field, div.actions {
 .field_with_errors label { margin: 0px 0px 0px 0px; }
 
 
-button.button, a.button, input[type=submit].button {
+button.button, a.button, input[type=submit].button, .actions input[type=submit] {
 padding: 6px 10px;
 -webkit-border-radius: 2px 2px;
 border: solid 1px rgb(153, 153, 153);

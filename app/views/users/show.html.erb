@@ -1,7 +1,5 @@
 <div class="trb">
-	<%= link_to "Switch Users", users_path, :class => :button %>
 	<%= link_to "Edit", edit_user_path(@user), :class => :button %>
-	<%= link_to 'Delete', @user, :confirm => 'Are you sure?', :method => :delete, :class => :button %>
 </div>
 
 <h1><%= "#{@user.firstname} #{@user.lastname}" %></h1>
@@ -18,10 +16,4 @@
 
 </dl>
 
-<% content_for :sidebar do %>
-	<h2>Manage</h2>
-	<ul>
-		<li><%= link_to "Enrollments", user_enrollments_path(@user) %></li>
-		<li><%= link_to "Faculty Assignments", user_faculty_assignments_path(@user) %></li>
-	</ul>
-<% end %>
+<%= render :partial => 'sidebar' %>

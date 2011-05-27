@@ -8,6 +8,8 @@ module ApplicationHelper
     section = @controller.controller_name
     if section == "activities" or section == "assessments" or section == "attendances" or section == "performances"
       section = "units"
+    elsif section == "enrollments" or section == "faculty_assignments"
+      section = "users"
     end
     return 'current' if section == tab
     ''

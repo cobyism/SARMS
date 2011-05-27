@@ -10,6 +10,4 @@
   <%= @enrollment.unit_id %>
 </p>
 
-
-<%= link_to 'Edit', edit_enrollment_path(@enrollment) %> |
-<%= link_to 'Back', user_enrollments_path(@user) %>
+<%= render :partial => 'users/sidebar' %>
