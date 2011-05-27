@@ -1,0 +1,13 @@
+<% content_for :sidebar do %>
+	<h2><%= @unit.code %></h2>
+	<ul>
+		<li><%= link_to "Unit Details", @unit %></li>
+		<li><%= link_to "Enrolled Students", unit_enrollments_path(@unit) %></li>
+		<li><%= link_to "Assigned Faculty" %></li>
+		<li><%= link_to "Activities", unit_activities_path(@unit) %></li>
+		<li><%= link_to "Assessments", unit_assessments_path(@unit) %></li>
+	</ul>
+	<h2>Actions</h2>
+	<%= link_to "Switch Units", units_path, :class => :button %>
+	<%= link_to 'Delete Unit', @unit, :confirm => 'Are you sure?', :method => :delete, :class => :button %>
+<% end %>

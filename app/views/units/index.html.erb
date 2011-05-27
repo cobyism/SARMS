@@ -2,27 +2,27 @@
 	<%= link_to 'New Unit', new_unit_path, :class => :button %>
 </div>
 
-<h1>Units</h1>
+<h1><%= @title %></h1>
 
 <table>
-  <tr>
-    <th>Code</th>
-    <th>Name</th>
-    <th>Trimester</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
-
-<% @units.each do |unit| %>
-  <tr>
-    <td><%= unit.code %></td>
-    <td><%= unit.name %></td>
-	<td><%= "Trimester #{unit.term}, #{unit.begins_at.year}" %></td>
-    <td><%= link_to 'Show', unit %></td>
-    <td><%= link_to 'Edit', edit_unit_path(unit) %></td>
-    <td><%= link_to 'Destroy', unit, :confirm => 'Are you sure?', :method => :delete %></td>
-  </tr>
-<% end %>
+	<% @units.each do |unit| %>
+	  <tr class='separator'>
+	    <td><%= link_to unit.full_name, unit %></td>
+		<td><%= "Trimester #{unit.term}, #{unit.begins_at.year}" %></td>
+	    <td class='actions'>
+			<%= link_to 'Edit', edit_unit_path(unit), :class => :button %>
+			<%= link_to 'Delete', unit, :confirm => 'Are you sure?', :method => :delete, :class => :button %>
+		</td>
+	  </tr>
+	<% end %>
 </table>
 
+<% content_for :sidebar do %>
+	<h2>Filter Units</h2>
+	<ul>
+		<li><%= link_to "All Units", units_path %></li>
+		<li><%= link_to "Trimester 1", units_path(:trimester => "1") %></li>
+		<li><%= link_to "Trimester 2", units_path(:trimester => "2") %></li>
+		<li><%= link_to "Trimester 3", units_path(:trimester => "3") %>	</li>
+	</ul>
+<% end %>

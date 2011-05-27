@@ -2,7 +2,7 @@
 	<%= link_to "Edit", edit_user_path(@user), :class => :button %>
 </div>
 
-<h1><%= "#{@user.firstname} #{@user.lastname}" %></h1>
+<h1><%= @user.full_name %></h1>
 
 <dl>
 	<dt>Email</dt>

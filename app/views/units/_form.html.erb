@@ -21,17 +21,17 @@
   </div>
   <div class="field">
     <%= f.label :begins_at %><br />
-    <%= f.datetime_select :begins_at %>
+    <%= f.date_select :begins_at, :order => [:day, :month, :year] %>
   </div>
   <div class="field">
     <%= f.label :ends_at %><br />
-    <%= f.datetime_select :ends_at %>
+    <%= f.date_select :ends_at, :order => [:day, :month, :year] %>
   </div>
   <div class="field">
-    <%= f.label :term %><br />
-    <%= f.text_field :term %>
+    <%= f.label :term, "Trimester" %><br />
+	<%= f.select :term, [[1], [2], [3]] %>
   </div>
   <div class="actions">
-    <%= f.submit %>
+    <%= f.submit %> or <%= link_to "cancel", :back %>
   </div>
 <% end %>

@@ -1,8 +1,18 @@
+<% if @user %>
 <div class="trb">
 	<%= link_to 'New Enrollment', new_user_enrollment_path(@user), :class => :button %>
 </div>
+<% elsif @unit %>
+<div class="trb">
+	<%= link_to 'New Enrollment', new_unit_enrollment_path(@unit), :class => :button %>
+</div>
+<% end %>
 
+<% if @user %>
 <h1>Enrollments for <%= @user.full_name %></h1>
+<% elsif @unit %>
+<h1>Enrollments for <%= @unit.full_name %></h1>
+<% end %>
 
 <table>
   <tr>
@@ -15,7 +25,13 @@
 
 <% @enrollments.each do |enrollment| %>
   <tr>
-    <td><%= enrollment.unit.full_name %></td>
+    <td>
+		<% if @user %>
+			<%= enrollment.unit.full_name %>
+		<% elsif @unit %>
+			<%= enrollment.user.full_name %>
+		<% end %>
+	</td>
 	<td><%= enrollment.created_at.to_date %></td>
     <td class='actions'>
 		<%= link_to 'View Enrollment', enrollment, :class => :button %>
@@ -25,4 +41,8 @@
 <% end %>
 </table>
 
-<%= render :partial => 'users/sidebar' %>
+<% if @unit %>
+	<%= render :partial => 'units/sidebar' %>
+<% elsif @user %>
+	<%= render :partial => 'users/sidebar' %>
+<% end %>

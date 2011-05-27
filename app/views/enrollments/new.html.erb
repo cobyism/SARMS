@@ -1,9 +1,25 @@
-<div class="trb">
-	<%= link_to 'Cancel', user_enrollments_path(@user), :class => :button %>
-</div>
 
-<h1>New enrollment for <%= @user.full_name %></h1>
 
-<%= render 'form' %>
 
-<%= render :partial => 'users/sidebar' %>
+
+<% if @unit %>
+	<div class="trb">
+		<%= link_to 'Cancel', unit_enrollments_path(@unit), :class => :button %>
+	</div>
+
+	<h1>New enrollment for <%= @unit.code %></h1>
+	
+	<%= render 'form' %>
+
+	<%= render :partial => 'units/sidebar' %>
+<% elsif @user %>
+	<div class="trb">
+		<%= link_to 'Cancel', user_enrollments_path(@user), :class => :button %>
+	</div>
+
+	<h1>New enrollment for <%= @user.full_name %></h1>
+	
+	<%= render 'form' %>
+	
+	<%= render :partial => 'users/sidebar' %>
+<% end %>

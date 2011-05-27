@@ -13,6 +13,8 @@ SARMS::Application.routes.draw do
   end
 
   resources :units do
+    resources :enrollments, :shallow => true
+    resources :faculty_assignments, :shallow => true
     resources :activities, :shallow => true do
         resources :attendances, :shallow => true
       end

@@ -3,6 +3,19 @@ class UnitsController < ApplicationController
   # GET /units.xml
   def index
     @units = Unit.all
+    if params[:trimester] == '1'
+      @units = Unit.where('term = 1')
+      @title = "Trimester 1 Units"
+    elsif params[:trimester] == '2'
+      @units = Unit.where('term = 2')
+      @title = "Trimester 2 Units"
+    elsif params[:trimester] == '3'
+      @units = Unit.where('term = 3')
+      @title = "Trimester 3 Units"
+    else
+      @units = Unit.all
+      @title = "All Units"
+    end
 
     respond_to do |format|
       format.html # index.html.erb

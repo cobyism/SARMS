@@ -6,10 +6,10 @@ module ApplicationHelper
 
   def current_if(tab)
     section = @controller.controller_name
-    if section == "activities" or section == "assessments" or section == "attendances" or section == "performances"
+    if section == "activities" or section == "assessments" or section == "attendances" or section == "performances" or @unit
       section = "units"
-    elsif section == "enrollments" or section == "faculty_assignments"
-      section = "users"
+    elsif section == "enrollments" or section == "faculty_assignments" or @user
+         section = "users"
     end
     return 'current' if section == tab
     ''
