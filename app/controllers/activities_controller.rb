@@ -29,7 +29,7 @@ class ActivitiesController < ApplicationController
   # GET /activities/new
   # GET /activities/new.xml
   def new
-    @activity = Activity.new
+    @activity = @unit.activities.build
 
     respond_to do |format|
       format.html # new.html.erb
@@ -77,7 +77,7 @@ class ActivitiesController < ApplicationController
     @activity.destroy
 
     respond_to do |format|
-      format.html { redirect_to(unit_activities_url(@unit)) }
+      format.html { redirect_to(unit_activities_url(@unit), :notice => 'Activity was successfully deleted.') }
       format.xml  { head :ok }
     end
   end
@@ -95,6 +95,7 @@ class ActivitiesController < ApplicationController
       @unit = Unit.find(params[:unit_id])
     else
       if params[:id]
+        @activity = Activity.find(params[:id])
         @unit = @activity.unit
       else
         @unit = nil
