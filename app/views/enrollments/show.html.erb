@@ -8,15 +8,4 @@
 	<dd><%= @enrollment.created_at.strftime("%A, %e %B, %Y") %></dd>
 </dl>
 
-<% content_for :sidebar do %>
-	<h2><%= @enrollment.full_name %></h2>
-	<ul>
-		<li><%= link_to "Overview", @enrollment %></li>
-		<li><%= link_to "Attendance", @enrollment %></li>
-		<li><%= link_to "Performance", @enrollment %></li>
-		<li><%= link_to "At-Risk Notifications", @enrollment %></li>
-	</ul>
-	<h2>Actions</h2>
-	<%= link_to "Switch Students", users_path(:scope => 'students'), :class => :button %>
-	<%= link_to "Switch Units", units_path, :class => :button %>
-<% end %>
+<%= render :partial => 'sidebar' %>

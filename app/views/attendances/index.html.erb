@@ -1,25 +1,21 @@
-<h1>Listing attendances</h1>
+<h1>Attendances</h1>
 
 <table>
-  <tr>
-    <th>Enrollment</th>
-    <th>Activity</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
-
-<% @attendances.each do |attendance| %>
-  <tr>
-    <td><%= attendance.enrollment_id %></td>
-    <td><%= attendance.activity_id %></td>
-    <td><%= link_to 'Show', attendance %></td>
-    <td><%= link_to 'Edit', edit_attendance_path(attendance) %></td>
-    <td><%= link_to 'Destroy', attendance, :confirm => 'Are you sure?', :method => :delete %></td>
-  </tr>
-<% end %>
+	<% @activities.each do |activity| %>
+		<tr class='separator'>
+			<td><%= activity.name %></td>
+		    <td><%= activity.date.strftime("%A, %e %b %Y") %></td>
+			<td><%= attended_or_not(@enrollment, activity) %></td>
+			<td class='actions'>
+				<% if has_attended(@enrollment, activity) %>
+					<%= link_to 'Remove Attendance', get_attendance(@enrollment, activity), :confirm => 'Are you sure?', :method => :delete, :class => :button %>
+				<% else %>
+					<% @attendance.activity_id = activity.id %>
+					<%= render :partial => 'form' %>
+				<% end %>
+			</td>
+		</tr>
+	<% end %>
 </table>
 
-<br />
-
-<%= link_to 'New Attendance', new_attendance_path %>
+<%= render :partial => 'enrollments/sidebar' %>

@@ -1,0 +1,12 @@
+<% content_for :sidebar do %>
+	<h2><%= @enrollment.full_name %></h2>
+	<ul>
+		<li><%= link_to "Overview", @enrollment %></li>
+		<li><%= link_to "Attendance", enrollment_attendances_path(@enrollment) %></li>
+		<li><%= link_to "Performance", enrollment_performances_path(@enrollment) %></li>
+		<li><%= link_to "At-Risk Notifications", enrollment_at_risk_events_path(@enrollment) %></li>
+	</ul>
+	<h2>Actions</h2>
+	<%= link_to "Switch Students", users_path(:scope => 'students'), :class => :button %>
+	<%= link_to "Switch Units", units_path, :class => :button %>
+<% end %>

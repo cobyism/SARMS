@@ -1,8 +1,6 @@
 SARMS::Application.routes.draw do
   get "dashboard" => "dashboard#index", :as => "dashboard"
 
-
-
   resources :faculty_assignments
 
   resources :enrollments do
@@ -10,6 +8,8 @@ SARMS::Application.routes.draw do
       resources :at_risk_events, :shallow => true do
         resources :responses, :shallow => true
       end
+      resources :attendances, :shallow => true
+      resources :performances, :shallow => true
   end
 
   resources :units do

@@ -113,3 +113,6 @@ td.actions {text-align: right;}
 .trb { float: right; }
 
 #secondary h2 { border-bottom: 2px solid #fc0;}
+
+span.attended { color: green; }
+span.not_attended { color: red; }
