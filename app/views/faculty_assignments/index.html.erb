@@ -15,7 +15,8 @@
   <tr class='separator'>
     <td>
 		<% if @user %>
-			<%= faculty_assignment.unit.full_name %>
+			<%= faculty_assignment.unit.full_name %><br />
+			<%= faculty_assignment.unit.trimester %>
 		<% elsif @unit %>
 			<%= faculty_assignment.user.full_name %>
 		<% end %>
