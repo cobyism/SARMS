@@ -1,8 +1,15 @@
 class AssessmentsController < ApplicationController
+  
+  before_filter :find_assessment, :except => [:index, :new, :create]
+  before_filter :find_unit
+  
   # GET /assessments
   # GET /assessments.xml
   def index
     @assessments = Assessment.all
+    if params[:unit_id]
+      @assessments = @unit.assessments
+    end
 
     respond_to do |format|
       format.html # index.html.erb
@@ -13,7 +20,6 @@ class AssessmentsController < ApplicationController
   # GET /assessments/1
   # GET /assessments/1.xml
   def show
-    @assessment = Assessment.find(params[:id])
 
     respond_to do |format|
       format.html # show.html.erb
@@ -24,7 +30,7 @@ class AssessmentsController < ApplicationController
   # GET /assessments/new
   # GET /assessments/new.xml
   def new
-    @assessment = Assessment.new
+    @assessment = @unit.assessments.build
 
     respond_to do |format|
       format.html # new.html.erb
@@ -34,7 +40,6 @@ class AssessmentsController < ApplicationController
 
   # GET /assessments/1/edit
   def edit
-    @assessment = Assessment.find(params[:id])
   end
 
   # POST /assessments
@@ -56,7 +61,7 @@ class AssessmentsController < ApplicationController
   # PUT /assessments/1
   # PUT /assessments/1.xml
   def update
-    @assessment = Assessment.find(params[:id])
+    @assessment = Assessment.find(params[:id]) 
 
     respond_to do |format|
       if @assessment.update_attributes(params[:assessment])
@@ -76,8 +81,28 @@ class AssessmentsController < ApplicationController
     @assessment.destroy
 
     respond_to do |format|
-      format.html { redirect_to(assessments_url) }
+      format.html { redirect_to(unit_assessments_path(@unit), :notice => 'Assessment was successfully deleted.') }
       format.xml  { head :ok }
+    end
+  end
+  
+  
+  private
+  
+  def find_assessment
+    @assessment = Assessment.find(params[:id])
+  end
+    
+  def find_unit
+    if params[:unit_id]
+      @unit = Unit.find(params[:unit_id])
+    else
+      if params[:id]
+        @assessment = Assessment.find(params[:id])
+        @unit = @assessment.unit
+      else
+        @unit = nil
+      end
     end
   end
 end

@@ -93,6 +93,7 @@ namespace :db do
         assessment.name = "Assessment #{@assessment_count}"
         assessment.category = ["Quiz", "Assignment", "Assignment", "Mid-term"]
         assessment.total_marks = [10, 15, 45, 60, 80, 120]
+        assessment.due_at = unit.ends_at - rand(60).days + rand(8).hours + 9.hours
         assessment.weight = [10, 15, 15, 20]
         @assessment_count += 1
         @weight_sum += assessment.weight
@@ -102,6 +103,7 @@ namespace :db do
         assessment.name = "Final Exam"
         assessment.category = "Examination"
         assessment.total_marks = [80, 120, 140, 190, 200]
+        assessment.due_at = (unit.ends_at - 7.days) + rand(8).hours + 9.hours
         assessment.weight = 100 - @weight_sum
       end
     end

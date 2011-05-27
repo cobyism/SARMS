@@ -1,33 +1,26 @@
-<h1>Listing assessments</h1>
+<div class="trb">
+	<%= link_to 'New Assessment', new_unit_assessment_path(@unit), :class => :button %>
+</div>
+<h1>Assessments for <%= @unit.code %></h1>
 
 <table>
-  <tr>
-    <th>Unit</th>
-    <th>Name</th>
-    <th>Type</th>
-    <th>Due at</th>
-    <th>Total marks</th>
-    <th>Weight</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
-
 <% @assessments.each do |assessment| %>
-  <tr>
-    <td><%= assessment.unit_id %></td>
-    <td><%= assessment.name %></td>
-    <td><%= assessment.type %></td>
-    <td><%= assessment.due_at %></td>
-    <td><%= assessment.total_marks %></td>
-    <td><%= assessment.weight %></td>
-    <td><%= link_to 'Show', assessment %></td>
-    <td><%= link_to 'Edit', edit_assessment_path(assessment) %></td>
-    <td><%= link_to 'Destroy', assessment, :confirm => 'Are you sure?', :method => :delete %></td>
+  <tr class='separator'>
+    <td>
+		<strong><%= assessment.name %></strong><br />
+		<%= assessment.due %>
+	</td>
+    <td>
+		Weight: <%= assessment.weight.to_i %>%<br />
+		<%= assessment.total_marks.to_i %> Marks
+	</td>
+    <td class='actions'>
+		<%= link_to 'Performance', nil, :class => :button %>
+		<%= link_to 'Edit', edit_assessment_path(assessment), :class => :button %>
+		<%= link_to 'Delete', assessment, :confirm => 'Are you sure?', :method => :delete, :class => :button %>
+	</td>
   </tr>
 <% end %>
 </table>
 
-<br />
-
-<%= link_to 'New Assessment', new_assessment_path %>
+<%= render :partial => 'units/sidebar' %>

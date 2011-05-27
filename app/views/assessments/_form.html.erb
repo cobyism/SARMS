@@ -1,4 +1,10 @@
-<%= form_for(@assessment) do |f| %>
+<% 
+form_object = [@unit, @assessment]
+if @controller.action_name == 'edit'
+	form_object = @assessment
+end
+%>
+<%= form_for(form_object) do |f| %>
   <% if @assessment.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@assessment.errors.count, "error") %> prohibited this assessment from being saved:</h2>
@@ -24,8 +30,8 @@
     <%= f.text_field :type %>
   </div>
   <div class="field">
-    <%= f.label :due_at %><br />
-    <%= f.datetime_select :due_at %>
+    <%= f.label :due_at, 'Due at (Date, Time)' %><br />
+    <%= f.datetime_select :due_at, :order => [:hour, :minute, :day, :month, :year] %>
   </div>
   <div class="field">
     <%= f.label :total_marks %><br />
@@ -36,6 +42,6 @@
     <%= f.text_field :weight %>
   </div>
   <div class="actions">
-    <%= f.submit %>
+    <%= f.submit %> or <%= link_to "cancel", :back %>
   </div>
 <% end %>

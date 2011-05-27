@@ -1,5 +1,9 @@
+<div class="trb">
+	<%= link_to 'Cancel', unit_assessments_path(@unit), :class => :button %>
+</div>
+
 <h1>New assessment</h1>
 
 <%= render 'form' %>
 
-<%= link_to 'Back', assessments_path %>
+<%= render :partial => 'units/sidebar' %>

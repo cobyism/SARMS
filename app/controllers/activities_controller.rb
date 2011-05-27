@@ -77,7 +77,7 @@ class ActivitiesController < ApplicationController
     @activity.destroy
 
     respond_to do |format|
-      format.html { redirect_to(unit_activities_url(@unit), :notice => 'Activity was successfully deleted.') }
+      format.html { redirect_to(unit_activities_path(@unit), :notice => 'Activity was successfully deleted.') }
       format.xml  { head :ok }
     end
   end
@@ -87,8 +87,6 @@ class ActivitiesController < ApplicationController
   def find_activity
     @activity = Activity.find(params[:id])
   end
-  
-  private
     
   def find_unit
     if params[:unit_id]
