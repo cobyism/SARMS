@@ -20,5 +20,9 @@ class Enrollment < ActiveRecord::Base
   def unit_name
     Unit.find(self.unit_id).name
   end
+  
+  def full_name
+    "#{self.user.full_name} → #{self.unit.code}"
+  end
 
 end
