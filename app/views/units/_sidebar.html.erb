@@ -3,7 +3,7 @@
 	<ul>
 		<li><%= link_to "Unit Details", @unit %></li>
 		<li><%= link_to "Enrolled Students", unit_enrollments_path(@unit) %></li>
-		<li><%= link_to "Assigned Faculty" %></li>
+		<li><%= link_to "Assigned Faculty", unit_faculty_assignments_path(@unit) %></li>
 		<li><%= link_to "Activities", unit_activities_path(@unit) %></li>
 		<li><%= link_to "Assessments", unit_assessments_path(@unit) %></li>
 	</ul>

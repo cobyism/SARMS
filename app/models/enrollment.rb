@@ -7,6 +7,7 @@ class Enrollment < ActiveRecord::Base
   has_many :performances, :dependent => :destroy
 
   validates_presence_of :user_id, :unit_id
+  validates_uniqueness_of :user_id, :scope => :unit_id, :message => "is already enrolled in this unit"
   
   def user_name
     User.find(self.user_id).full_name if User.find(self.user_id)

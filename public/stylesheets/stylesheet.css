@@ -32,6 +32,7 @@ a { color: #00C; }
 
 #flash .notice { border: 2px solid green; background: #3c3; color: #fff; padding: 5px 8px; text-align: center; }
 #flash .alert { border: 2px solid #c00; background: #d22; color: #fff; padding: 5px 8px; text-align: center; }
+#flash .notice { }
 body #main div#flash { margin: 0 auto; }
 
 
@@ -73,7 +74,7 @@ div.field, div.actions {
 #error_explanation h2 {
   text-align: left;
   font-weight: bold;
-  padding: 5px 5px 5px 15px;
+  padding: 5px 5px 5px 10px;
   font-size: 12px;
   margin: -7px;
   margin-bottom: 0px;
@@ -84,6 +85,7 @@ div.field, div.actions {
 #error_explanation ul li {
   font-size: 12px;
   list-style: square;
+  margin-left: 25px;
 }
 
 .field br { display: none; }

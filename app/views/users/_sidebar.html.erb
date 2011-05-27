@@ -2,8 +2,12 @@
 	<h2><%= @user.full_name %></h2>
 	<ul>
 		<li><%= link_to "User Details", @user %></li>
-		<li><%= link_to "Enrollments", user_enrollments_path(@user) %></li>
-		<li><%= link_to "Faculty Assignments", user_faculty_assignments_path(@user) %></li>
+		<% if @user.is_student? %>
+			<li><%= link_to "Enrollments", user_enrollments_path(@user) %></li>
+		<% end %>
+		<% if @user.is_faculty? && !@user.is_admin? %>
+			<li><%= link_to "Faculty Assignments", user_faculty_assignments_path(@user) %></li>
+		<% end %>
 	</ul>
 	<h2>Actions</h2>
 	<%= link_to "Switch Users", users_path, :class => :button %>

@@ -29,6 +29,10 @@ class User < ActiveRecord::Base
       "Student"
     end
   end
+  
+  def is_student?
+    !self.is_faculty
+  end
 
   def status
     if self.is_active?

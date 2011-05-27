@@ -1,29 +1,62 @@
 <table>
-	<% @units.each do |unit| %>
-		<tr>
-			<% @faculty_assignment = @user.faculty_assignments.build(:unit_id => unit.id) %>
-			<%= form_for([@user, @faculty_assignment]) do |f| %>
-				<td>
-					<%= unit.full_name %>
-					<%= f.hidden_field :user_id %>
-					<%= f.hidden_field :unit_id %>
-				</td>
-				<td>
-					<%= f.submit 'Create Faculty Assignment', :class => :button %>
-				</td>
-	
-			  <% if @faculty_assignment.errors.any? %>
-			    <div id="error_explanation">
-			      <h2><%= pluralize(@faculty_assignment.errors.count, "error") %> prohibited this faculty assignment from being saved:</h2>
+	<% if @user %>
+		<% @units.each do |unit| %>
+			<tr>
+				<% if @faculty_assignment.errors.any? %>
+				    <div id="error_explanation">
+				      <h2><%= pluralize(@faculty_assignment.errors.count, "error") %> prohibited this faculty assignment from being saved:</h2>
+				      <ul>
+				      <% @faculty_assignment.errors.full_messages.each do |msg| %>
+				        <li><%= msg %></li>
+				      <% end %>
+				      </ul>
+				    </div>
+				  <% end %>
+				<% @faculty_assignment = @user.faculty_assignments.build(:unit_id => unit.id) %>
+				<%= form_for([@user, @faculty_assignment]) do |f| %>
+					<td>
+						<%= unit.full_name %>
+						<%= f.hidden_field :user_id %>
+						<%= f.hidden_field :unit_id %>
+					</td>
+					<td>
+						<%= unit.trimester %>
+					</td>
+					<td>
+						<%= f.submit 'Create Faculty Assignment', :class => :button %>
+					</td>
+				<% end %>
+			</tr>
+		<% end %>
+	<% elsif @unit %>
+		<% @users.each do |user| %>
+			<tr>
+				<% if @faculty_assignment.errors.any? %>
+				    <div id="error_explanation">
+				      <h2><%= pluralize(@faculty_assignment.errors.count, "error") %> prohibited this faculty assignment from being saved:</h2>
 
-			      <ul>
-			      <% @faculty_assignment.errors.full_messages.each do |msg| %>
-			        <li><%= msg %></li>
-			      <% end %>
-			      </ul>
-			    </div>
-			  <% end %>
-			<% end %>
-		</tr>
+				      <ul>
+				      <% @faculty_assignment.errors.full_messages.each do |msg| %>
+				        <li><%= msg %></li>
+				      <% end %>
+				      </ul>
+				    </div>
+				  <% end %>
+				<% @faculty_assignment = @unit.faculty_assignments.build(:user_id => user.id) %>
+				<%= form_for([@unit, @faculty_assignment]) do |f| %>
+					<td>
+						<%= user.full_name %>
+						<%= f.hidden_field :user_id %>
+						<%= f.hidden_field :unit_id %>
+					</td>
+					<td>
+						<%= user.role %>
+					</td>
+					<td>
+						<%= f.submit 'Create Faculty Assignment', :class => :button %>
+					</td>
+				<% end %>
+			</tr>
+		<% end %>
 	<% end %>
 </table>

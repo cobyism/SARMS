@@ -35,7 +35,7 @@ namespace :db do
     
     [User.where('email != ?', "admin@sarms.com"), Unit, Enrollment, FacultyAssignment, Activity, Assessment].each(&:delete_all)
     
-    User.populate 10 do |user|
+    User.populate 40 do |user|
       user.firstname = Faker::Name.first_name
       user.lastname = Faker::Name.last_name
       user.email = Faker::Internet.email
@@ -46,7 +46,7 @@ namespace :db do
       user.updated_at = user.created_at..Time.now
     end
     
-    User.populate 8 do |user|
+    User.populate 12 do |user|
       user.firstname = Faker::Name.first_name
       user.lastname = Faker::Name.last_name
       user.email = Faker::Internet.email
@@ -57,7 +57,7 @@ namespace :db do
       user.updated_at = user.created_at..Time.now
     end
     
-    User.populate 3 do |user|
+    User.populate 4 do |user|
       user.firstname = Faker::Name.first_name
       user.lastname = Faker::Name.last_name
       user.email = Faker::Internet.email
@@ -107,7 +107,7 @@ namespace :db do
     end
     
     User.students.each do |student|
-      Enrollment.populate 1..4 do |enrollment|
+      Enrollment.populate 3..4 do |enrollment|
         enrollment.user_id = student.id
         enrollment.unit_id = 1..Unit.all.count
       end

@@ -1,21 +1,25 @@
-<div class="trb">
-	<%= link_to 'New Faculty assignment', new_user_faculty_assignment_path(@user), :class => :button %>
-</div>
-
-<h1>Faculty Assignments for <%= @user.full_name %></h1>
+<% if @user %>
+	<div class="trb">
+		<%= link_to 'New Faculty assignment', new_user_faculty_assignment_path(@user), :class => :button %>
+	</div>
+	<h1>Faculty Assignments for <%= @user.full_name %></h1>
+<% elsif @unit %>
+	<div class="trb">
+		<%= link_to 'New Faculty assignment', new_unit_faculty_assignment_path(@unit), :class => :button %>
+	</div>
+	<h1>Faculty Assignments for <%= @unit.code %></h1>
+<% end %>
 
 <table>
-  <tr>
-    <th>Unit</th>
-	<th>Date Assigned</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
-
 <% @faculty_assignments.each do |faculty_assignment| %>
-  <tr>
-    <td><%= faculty_assignment.unit.full_name %></td>
+  <tr class='separator'>
+    <td>
+		<% if @user %>
+			<%= faculty_assignment.unit.full_name %>
+		<% elsif @unit %>
+			<%= faculty_assignment.user.full_name %>
+		<% end %>
+	</td>
 	<td><%= faculty_assignment.created_at.to_date %></td>
     <td class='actions'>
 		<%= link_to 'View Faculty Assignment', faculty_assignment, :class => :button %>
@@ -25,4 +29,8 @@
 <% end %>
 </table>
 
-<%= render :partial => 'users/sidebar' %>
+<% if @unit %>
+	<%= render :partial => 'units/sidebar' %>
+<% elsif @user %>
+	<%= render :partial => 'users/sidebar' %>
+<% end %>

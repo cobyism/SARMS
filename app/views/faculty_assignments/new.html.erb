@@ -1,7 +1,18 @@
 <div class="trb">
-	<%= link_to 'Cancel', user_faculty_assignments_path(@user), :class => :button %>
+	<%= link_to 'Cancel', :back, :class => :button %>
 </div>
+<% if @unit %>
+	
 
-<h1>Assign <%= @user.full_name %> to a Unit</h1>
+	<h1>Assign faculty to <%= @unit.code %></h1>
+	
+	<%= render 'form' %>
 
-<%= render 'form' %>
+	<%= render :partial => 'units/sidebar' %>
+<% elsif @user %>
+	<h1>Assign <%= @user.full_name %> to a Unit</h1>
+
+	<%= render 'form' %>
+	
+	<%= render :partial => 'users/sidebar' %>
+<% end %>

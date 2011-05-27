@@ -2,6 +2,17 @@
 	<% if @user %>
 		<% @units.each do |unit| %>
 			<tr>
+				<% if @enrollment.errors.any? %>
+				    <div id="error_explanation">
+				      <h2><%= pluralize(@enrollment.errors.count, "error") %> prohibited this enrollment from being saved:</h2>
+
+				      <ul>
+				      <% @enrollment.errors.full_messages.each do |msg| %>
+				        <li><%= msg %></li>
+				      <% end %>
+				      </ul>
+				    </div>
+				  <% end %>
 				<% @enrollment = @user.enrollments.build(:unit_id => unit.id) %>
 				<%= form_for([@user, @enrollment]) do |f| %>
 					<td>
@@ -15,8 +26,13 @@
 					<td>
 						<%= f.submit 'Create Enrollment', :class => :button %>
 					</td>
-	
-				  <% if @enrollment.errors.any? %>
+				<% end %>
+			</tr>
+		<% end %>
+	<% elsif @unit %>
+		<% @users.each do |user| %>
+			<tr>
+				<% if @enrollment.errors.any? %>
 				    <div id="error_explanation">
 				      <h2><%= pluralize(@enrollment.errors.count, "error") %> prohibited this enrollment from being saved:</h2>
 
@@ -27,12 +43,6 @@
 				      </ul>
 				    </div>
 				  <% end %>
-				<% end %>
-			</tr>
-		<% end %>
-	<% elsif @unit %>
-		<% @users.each do |user| %>
-			<tr>
 				<% @enrollment = @unit.enrollments.build(:user_id => user.id) %>
 				<%= form_for([@unit, @enrollment]) do |f| %>
 					<td>
@@ -46,18 +56,6 @@
 					<td>
 						<%= f.submit 'Create Enrollment', :class => :button %>
 					</td>
-	
-				  <% if @enrollment.errors.any? %>
-				    <div id="error_explanation">
-				      <h2><%= pluralize(@enrollment.errors.count, "error") %> prohibited this enrollment from being saved:</h2>
-
-				      <ul>
-				      <% @enrollment.errors.full_messages.each do |msg| %>
-				        <li><%= msg %></li>
-				      <% end %>
-				      </ul>
-				    </div>
-				  <% end %>
 				<% end %>
 			</tr>
 		<% end %>

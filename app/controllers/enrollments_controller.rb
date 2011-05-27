@@ -3,8 +3,8 @@ class EnrollmentsController < ApplicationController
   before_filter :find_enrollment, :except => [:index, :new, :create]
   before_filter :find_user
   before_filter :find_unit
-  before_filter :find_units, :only => [:new, :edit]
-  before_filter :find_users, :only => [:new, :edit]
+  before_filter :find_units, :only => [:new, :create]
+  before_filter :find_users, :only => [:new, :create]
   
   # GET /enrollments
   # GET /enrollments.xml
@@ -69,7 +69,11 @@ class EnrollmentsController < ApplicationController
     @enrollment.destroy
 
     respond_to do |format|
-      format.html { redirect_to(user_enrollments_url(@user), :notice => 'Enrollment was successfully deleted.') }
+      if @unit
+        format.html { redirect_to(unit_enrollments_url(@unit), :notice => 'Enrollment was successfully deleted.') }
+      else
+        format.html { redirect_to(user_enrollments_url(@user), :notice => 'Enrollment was successfully deleted.') }
+      end
       format.xml  { head :ok }
     end
   end
@@ -85,7 +89,7 @@ class EnrollmentsController < ApplicationController
   end
   
   def find_users
-    @users = User.all
+    @users = User.students.all
   end
   
   def find_user
