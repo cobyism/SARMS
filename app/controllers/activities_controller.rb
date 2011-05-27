@@ -1,11 +1,15 @@
 class ActivitiesController < ApplicationController
   
   before_filter :find_activity, :except => [:index, :new, :create]
+  before_filter :find_unit
   
   # GET /activities
   # GET /activities.xml
   def index
     @activities = Activity.all
+    if params[:unit_id]
+      @activities = @unit.activities
+    end
 
     respond_to do |format|
       format.html # index.html.erb
@@ -82,5 +86,19 @@ class ActivitiesController < ApplicationController
   
   def find_activity
     @activity = Activity.find(params[:id])
+  end
+  
+  private
+    
+  def find_unit
+    if params[:unit_id]
+      @unit = Unit.find(params[:unit_id])
+    else
+      if params[:id]
+        @unit = @activity.unit
+      else
+        @unit = nil
+      end
+    end
   end
 end

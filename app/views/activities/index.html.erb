@@ -1,25 +1,19 @@
-<h1>Listing activities</h1>
-
-<%= link_to 'New Activity', new_unit_activity_path(@unit) %>
+<div class="trb">
+	<%= link_to 'New Activity', new_unit_activity_path(@unit), :class => :button %>
+</div>
+<h1>Activities for <%= @unit.code %></h1>
 
 <table>
-  <tr>
-    <th>Unit</th>
-    <th>Name</th>
-    <th>Date</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
-
 <% @activities.each do |activity| %>
-  <tr>
-    <td><%= activity.unit_id %></td>
+  <tr class='separator'>
     <td><%= activity.name %></td>
-    <td><%= activity.date %></td>
-    <td><%= link_to 'Show', activity %></td>
-    <td><%= link_to 'Edit', edit_activity_path(activity) %></td>
-    <td><%= link_to 'Destroy', activity, :confirm => 'Are you sure?', :method => :delete %></td>
+    <td><%= activity.date.strftime("%A, %e %b %Y") %></td>
+    <td class='actions'>
+		<%= link_to 'View Activity', activity, :class => :button %>
+		<%= link_to 'Delete', activity, :confirm => 'Are you sure?', :method => :delete, :class => :button %>
+	</td>
   </tr>
 <% end %>
 </table>
+
+<%= render :partial => 'units/sidebar' %>

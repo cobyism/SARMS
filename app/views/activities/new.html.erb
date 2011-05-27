@@ -1,5 +1,9 @@
-<h1>New activity</h1>
+<div class="trb">
+	<%= link_to 'Cancel', unit_activities_path(@unit), :class => :button %>
+</div>
+
+<h1>New activity for <%= @unit.code %></h1>
 
 <%= render 'form' %>
 
-<%= link_to 'Back', activities_path %>
+<%= render :partial => 'units/sidebar' %>

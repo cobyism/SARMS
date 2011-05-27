@@ -1,5 +1,3 @@
-<p id="notice"><%= notice %></p>
-
 <p>
   <b>Unit:</b>
   <%= @activity.unit_id %>
@@ -15,6 +13,4 @@
   <%= @activity.date %>
 </p>
 
-
-<%= link_to 'Edit', edit_activity_path(@activity) %> |
-<%= link_to 'Back', activities_path %>
+<%= render :partial => 'units/sidebar' %>
