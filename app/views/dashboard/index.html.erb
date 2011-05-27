@@ -1,2 +1,9 @@
-<h1>Dashboard#index</h1>
-<p>Find me in app/views/dashboard/index.html.erb</p>
+<h1>Dashboard</h1>
+<h3>Users (<%= link_to "#{@count[:users]} total", users_path %>)</h3>
+<ul>
+	<li><%= link_to "#{@count[:students]} Students", users_path(:scope => 'students') %></li>
+	<li><%= link_to "#{@count[:faculty]} Faculty Members", users_path(:scope => 'faculty') %></li>
+	<li><%= link_to "#{@count[:admins]} Administrators", users_path(:scope => 'admins') %></li>
+</ul>
+
+<h3>Units (<%= link_to "#{@count[:units]} total", units_path %>)</h3>
