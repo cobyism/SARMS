@@ -1,21 +1,45 @@
-<h1>Activity Attendance</h1>
+<% if @enrollment %>
+	<h1><%= @enrollment.unit.code %> Attendance for <%= @enrollment.user.full_name %></h1>
 
-<table>
-	<% @activities.each do |activity| %>
-		<tr class='separator'>
-			<td><%= activity.name %></td>
-		    <td><%= activity.date.strftime("%A, %e %b %Y") %></td>
-			<td><%= attended_or_not(@enrollment, activity) %></td>
-			<td class='actions'>
-				<% if has_attended(@enrollment, activity) %>
-					<%= link_to 'Remove Attendance', get_attendance(@enrollment, activity), :confirm => 'Are you sure?', :method => :delete, :class => :button %>
-				<% else %>
-					<% @attendance.activity_id = activity.id %>
-					<%= render :partial => 'form' %>
-				<% end %>
-			</td>
-		</tr>
-	<% end %>
-</table>
+	<table>
+		<% @activities.each do |activity| %>
+			<tr class='separator'>
+				<td><%= activity.name %></td>
+			    <td><%= activity.date.strftime("%A, %e %b %Y") %></td>
+				<td><%= attended_or_not(@enrollment, activity) %></td>
+				<td class='actions'>
+					<% if has_attended(@enrollment, activity) %>
+						<%= link_to 'Remove Attendance', get_attendance(@enrollment, activity), :method => :delete, :class => :button %>
+					<% else %>
+						<% @attendance.activity_id = activity.id %>
+						<%= render :partial => 'form' %>
+					<% end %>
+				</td>
+			</tr>
+		<% end %>
+	</table>
 
-<%= render :partial => 'enrollments/sidebar' %>
+	<%= render :partial => 'enrollments/sidebar' %>
+<% elsif @activity %>
+	<h1>Student Attendance for <%= @activity.name %></h1>
+	<h3><%= @activity.date.strftime("%A, %e %B, %Y") %></h3>
+
+	<table>
+		<% @enrollments.each do |enrollment| %>
+			<tr class='separator'>
+				<td><%= enrollment.user.full_name %></td>
+				<td><%= attended_or_not(enrollment, @activity) %></td>
+				<td class='actions'>
+					<% if has_attended(enrollment, @activity) %>
+						<%= link_to 'Remove Attendance', get_attendance(enrollment, @activity), :method => :delete, :class => :button %>
+					<% else %>
+						<% @attendance.enrollment_id = enrollment.id %>
+						<%= render :partial => 'form' %>
+					<% end %>
+				</td>
+			</tr>
+		<% end %>
+	</table>
+
+	<%= render :partial => 'units/sidebar' %>
+<% end %>

@@ -9,7 +9,7 @@
     <td><%= activity.name %></td>
     <td><%= activity.date.strftime("%A, %e %b %Y") %></td>
     <td class='actions'>
-		<%= link_to 'Attendance', nil, :class => :button %>
+		<%= link_to 'Attendance', activity_attendances_path(activity), :class => :button %>
 		<%= link_to 'Edit', edit_activity_path(activity), :class => :button %>
 		<%= link_to 'Delete', activity, :confirm => 'Are you sure?', :method => :delete, :class => :button %>
 	</td>

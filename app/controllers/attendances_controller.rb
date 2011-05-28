@@ -2,13 +2,20 @@ class AttendancesController < ApplicationController
   
   before_filter :find_attendance, :except => [:index, :new, :create]
   before_filter :find_enrollment
+  before_filter :find_activity
+  before_filter :find_enrollments
   before_filter :find_activities
+  before_filter :find_unit
   
   # GET /attendances
   # GET /attendances.xml
   def index
     @attendances = Attendance.all
-    @attendance = @enrollment.attendances.build
+    if @enrollment
+      @attendance = @enrollment.attendances.build
+    elsif @activity
+      @attendance = @activity.attendances.build
+    end
 
     respond_to do |format|
       format.html # index.html.erb
@@ -47,7 +54,11 @@ class AttendancesController < ApplicationController
 
     respond_to do |format|
       if @attendance.save
-        format.html { redirect_to(enrollment_attendances_path(@enrollment), :notice => 'Attendance was successfully created.') }
+        if @activity
+          format.html { redirect_to(activity_attendances_path(@activity), :notice => 'Attendance was successfully created.') }
+        else
+          format.html { redirect_to(enrollment_attendances_path(@enrollment), :notice => 'Attendance was successfully created.') }
+        end
         format.xml  { render :xml => @attendance, :status => :created, :location => @attendance }
       else
         format.html { redirect_to(enrollment_attendances_path(@enrollment), :alert => 'That student is already marked as attended for that activity.') }
@@ -76,7 +87,11 @@ class AttendancesController < ApplicationController
     @attendance.destroy
 
     respond_to do |format|
-      format.html { redirect_to(enrollment_attendances_path(@enrollment), :notice => 'Attendance was successfully deleted.') }
+      if @activity
+        format.html { redirect_to(activity_attendances_path(@activity), :notice => 'Attendance was successfully deleted.') }
+      else
+        format.html { redirect_to(enrollment_attendances_path(@enrollment), :notice => 'Attendance was successfully deleted.') }
+      end
       format.xml  { head :ok }
     end
   end
@@ -103,6 +118,31 @@ class AttendancesController < ApplicationController
   def find_activities
     if @enrollment
       @activities = @enrollment.unit.activities.all
+    end
+  end
+  
+  def find_activity
+    if params[:activity_id]
+      @activity = Activity.find(params[:activity_id])
+    else
+      if params[:id]
+        @attendance = Attendance.find(params[:id])
+        @activity = @attendance.activity
+      else
+        @activity = nil
+      end
+    end
+  end
+  
+  def find_enrollments
+    if @activity
+      @enrollments = @activity.unit.enrollments.all
+    end
+  end
+  
+  def find_unit
+    if @activity
+      @unit = @activity.unit
     end
   end
 end

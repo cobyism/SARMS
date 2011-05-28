@@ -1,16 +1,35 @@
-<%= form_for([@enrollment, @attendance]) do |f| %>
-  <% if @attendance.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@attendance.errors.count, "error") %> prohibited this attendance from being saved:</h2>
+<% if @enrollment %>
+	<%= form_for([@enrollment, @attendance]) do |f| %>
+	  <% if @attendance.errors.any? %>
+	    <div id="error_explanation">
+	      <h2><%= pluralize(@attendance.errors.count, "error") %> prohibited this attendance from being saved:</h2>
 
-      <ul>
-      <% @attendance.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
-    <%= f.hidden_field :enrollment_id %>
-    <%= f.hidden_field :activity_id %>
-    <%= f.submit 'Mark as Attended', :style => 'font-size: 12px;' %>
+	      <ul>
+	      <% @attendance.errors.full_messages.each do |msg| %>
+	        <li><%= msg %></li>
+	      <% end %>
+	      </ul>
+	    </div>
+	  <% end %>
+	    <%= f.hidden_field :enrollment_id %>
+	    <%= f.hidden_field :activity_id %>
+	    <%= f.submit 'Mark as Attended', :style => 'font-size: 12px;' %>
+	<% end %>
+<% elsif @activity %>
+	<%= form_for([@activity, @attendance]) do |f| %>
+	  <% if @attendance.errors.any? %>
+	    <div id="error_explanation">
+	      <h2><%= pluralize(@attendance.errors.count, "error") %> prohibited this attendance from being saved:</h2>
+
+	      <ul>
+	      <% @attendance.errors.full_messages.each do |msg| %>
+	        <li><%= msg %></li>
+	      <% end %>
+	      </ul>
+	    </div>
+	  <% end %>
+	    <%= f.hidden_field :enrollment_id %>
+	    <%= f.hidden_field :activity_id %>
+	    <%= f.submit 'Mark as Attended', :style => 'font-size: 12px;' %>
+	<% end %>
 <% end %>
