@@ -3,11 +3,13 @@ class PerformancesController < ApplicationController
   before_filter :find_performance, :except => [:index, :new, :create]
   before_filter :find_enrollment
   before_filter :find_assessments
+  before_filter :find_assessment, :only => [:new]
   
   # GET /performances
   # GET /performances.xml
   def index
     @performances = Performance.all
+    @performance = @enrollment.performances.build
 
     respond_to do |format|
       format.html # index.html.erb
@@ -27,7 +29,7 @@ class PerformancesController < ApplicationController
   # GET /performances/new
   # GET /performances/new.xml
   def new
-    @performance = @enrollment.performances.build
+    @performance = @assessment.performances.build
 
     respond_to do |format|
       format.html # new.html.erb
@@ -89,6 +91,9 @@ class PerformancesController < ApplicationController
   def find_enrollment
     if params[:enrollment_id]
       @enrollment = Enrollment.find(params[:enrollment_id])
+    elsif params[:assessment_id]
+      @assessment = Assessment.find(params[:assessment_id])
+      @enrollment = @assessment.enrollment
     else
       if params[:id]
         @performance = Performance.find(params[:id])
@@ -96,6 +101,13 @@ class PerformancesController < ApplicationController
       else
         @enrollment = nil
       end
+    end
+  end
+  
+  def find_assessment
+    if params[:assessment_id]
+      @assessment = Assessment.find(params[:assessment_id])
+      @enrollment = @assessment.enrollment
     end
   end
   

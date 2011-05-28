@@ -1,5 +1,6 @@
 class Assessment < ActiveRecord::Base
   belongs_to :unit
+  belongs_to :enrollment
   has_many :performances, :dependent => :destroy
   
   def due
