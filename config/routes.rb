@@ -2,6 +2,7 @@ SARMS::Application.routes.draw do
   get "dashboard" => "dashboard#index", :as => "dashboard"
 
   resources :faculty_assignments
+  resources :performances
 
   resources :enrollments do
       resources :notes, :shallow => true

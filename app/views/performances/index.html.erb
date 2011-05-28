@@ -1,27 +1,27 @@
-
-
-<h1>Listing performances</h1>
+<h1>Assessment Results</h1>
 
 <table>
-  <tr>
-    <th>Enrollment</th>
-    <th>Assessment</th>
-    <th>Achieved mark</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
-
-<% @performances.each do |performance| %>
-  <tr>
-    <td><%= performance.enrollment_id %></td>
-    <td><%= performance.assessment_id %></td>
-    <td><%= performance.achieved_mark %></td>
-    <td><%= link_to 'Show', performance %></td>
-    <td><%= link_to 'Edit', edit_performance_path(performance) %></td>
-    <td><%= link_to 'Destroy', performance, :confirm => 'Are you sure?', :method => :delete %></td>
-  </tr>
-<% end %>
+	<% @assessments.each do |assessment| %>
+	<tr class='separator'>
+	    <td>
+			<strong><%= assessment.name %></strong><br />
+			<%= assessment.due %>
+		</td>
+	    <td>
+			Weight: <%= assessment.weight.to_i %>%<br />
+			<%= assessment.total_marks.to_i %> Marks
+		</td>
+	    <td class='actions'>
+			<% @performance = get_performance(@enrollment, assessment) %>
+			<% if @performance %>
+				<%= @performance.result %>
+				<%= link_to 'Remove Result', @performance, :confirm => 'Are you sure?', :method => :delete, :class => :button %>
+			<% else %>
+				<%= link_to "Enter Marks", new_performance_path(:assessment_id => assessment.id, :enrollment_id => @enrollment.id), :class => :button %>
+			<% end %>
+		</td>
+	  </tr>
+	<% end %>
 </table>
 
-<%= link_to 'New Performance', new_performance_path %>
+<%= render :partial => 'enrollments/sidebar' %>

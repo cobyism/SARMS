@@ -30,6 +30,13 @@ class PerformancesController < ApplicationController
   # GET /performances/new.xml
   def new
     @performance = @assessment.performances.build
+    @enrollment = Enrollment.find(params[:enrollment_id])
+    @performance.enrollment_id = @enrollment.id
+    if @enrollment
+      @form_object = [@enrollment, @performance]
+    else
+      @form_object = @performance
+    end
 
     respond_to do |format|
       format.html # new.html.erb
@@ -48,7 +55,7 @@ class PerformancesController < ApplicationController
 
     respond_to do |format|
       if @performance.save
-        format.html { redirect_to(@performance, :notice => 'Performance was successfully created.') }
+        format.html { redirect_to(enrollment_performances_path(@enrollment), :notice => 'Performance was successfully created.') }
         format.xml  { render :xml => @performance, :status => :created, :location => @performance }
       else
         format.html { render :action => "new" }
@@ -77,7 +84,7 @@ class PerformancesController < ApplicationController
     @performance.destroy
 
     respond_to do |format|
-      format.html { redirect_to(performances_url) }
+      format.html { redirect_to(enrollment_performances_path(@enrollment), :notice => "Result was successfully removed.") }
       format.xml  { head :ok }
     end
   end
