@@ -15,7 +15,7 @@
 		<%= assessment.total_marks.to_i %> Marks
 	</td>
     <td class='actions'>
-		<%= link_to 'Performance', nil, :class => :button %>
+		<%= link_to 'Performance', assessment_performances_path(assessment), :class => :button %>
 		<%= link_to 'Edit', edit_assessment_path(assessment), :class => :button %>
 		<%= link_to 'Delete', assessment, :confirm => 'Are you sure?', :method => :delete, :class => :button %>
 	</td>

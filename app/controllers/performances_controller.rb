@@ -2,14 +2,20 @@ class PerformancesController < ApplicationController
   
   before_filter :find_performance, :except => [:index, :new, :create]
   before_filter :find_enrollment
+  before_filter :find_enrollments
+  before_filter :find_assessment
   before_filter :find_assessments
-  before_filter :find_assessment, :only => [:new]
+  before_filter :find_unit
   
   # GET /performances
   # GET /performances.xml
   def index
     @performances = Performance.all
-    @performance = @enrollment.performances.build
+    if @enrollment
+      @performance = @enrollment.performances.build
+    elsif
+      @performance = @assessment.performances.build
+    end
 
     respond_to do |format|
       format.html # index.html.erb
@@ -121,6 +127,18 @@ class PerformancesController < ApplicationController
   def find_assessments
     if @enrollment
       @assessments = @enrollment.unit.assessments.all
+    end
+  end
+  
+  def find_enrollments
+    if @assessment
+      @enrollments = @assessment.unit.enrollments.all
+    end
+  end
+  
+  def find_unit
+    if @assessment
+      @unit = @assessment.unit
     end
   end
 end

@@ -1,32 +1,67 @@
-<h1>Assessment Results</h1>
+<% if @enrollment %>
+	<h1>Assessment Results</h1>
 
-<table>
-	<% @assessments.each do |assessment| %>
-	<tr class='separator'>
-	    <td>
-			<strong><%= assessment.name %></strong><br />
-			<%= assessment.due %>
-		</td>
-	    <td>
-			Weight: <%= assessment.weight.to_i %>%<br />
-			<%= assessment.total_marks.to_i %> Marks
-		</td>
-	    <td class='actions'>
-			<% if assessment.id == params[:assessment_id].to_i %>
-				<%= render 'form' %>
+	<table>
+		<% @assessments.each do |assessment| %>
+		<tr class='separator'>
+		    <td>
+				<strong><%= assessment.name %></strong><br />
+				<%= assessment.due %>
+			</td>
+		    <td>
+				Weight: <%= assessment.weight.to_i %>%<br />
+				<%= assessment.total_marks.to_i %> Marks
+			</td>
+		    <td class='actions'>
+				<% if assessment.id == params[:assessment_id].to_i %>
+					<%= render 'form' %>
 				
-			<% else %>
-				<% @performance = get_performance(@enrollment, assessment) %>
-				<% if @performance %>
-					<%= @performance.result %>
-					<%= link_to 'Remove Result', @performance, :confirm => 'Are you sure?', :method => :delete, :class => :button %>
 				<% else %>
-					<%= link_to "Enter Marks", new_performance_path(:assessment_id => assessment.id, :enrollment_id => @enrollment.id), :class => :button %>
+					<% @performance = get_performance(@enrollment, assessment) %>
+					<% if @performance %>
+						<%= @performance.result %>
+						<%= link_to 'Remove Result', @performance, :confirm => 'Are you sure?', :method => :delete, :class => :button %>
+					<% else %>
+						<%= link_to "Enter Marks", new_performance_path(:assessment_id => assessment.id, :enrollment_id => @enrollment.id), :class => :button %>
+					<% end %>
 				<% end %>
-			<% end %>
-		</td>
-	  </tr>
-	<% end %>
-</table>
+			</td>
+		  </tr>
+		<% end %>
+	</table>
 
-<%= render :partial => 'enrollments/sidebar' %>
+	<%= render :partial => 'enrollments/sidebar' %>
+<% elsif @assessment %>
+	<h1>Assessment Results</h1>
+
+	<table>
+		<% @enrollments.each do |enrollment| %>
+		<tr class='separator'>
+		    <td>
+				<strong><%= assessment.name %></strong><br />
+				<%= assessment.due %>
+			</td>
+		    <td>
+				Weight: <%= assessment.weight.to_i %>%<br />
+				<%= assessment.total_marks.to_i %> Marks
+			</td>
+		    <td class='actions'>
+				<% if assessment.id == params[:assessment_id].to_i %>
+					<%= render 'form' %>
+				
+				<% else %>
+					<% @performance = get_performance(@enrollment, assessment) %>
+					<% if @performance %>
+						<%= @performance.result %>
+						<%= link_to 'Remove Result', @performance, :confirm => 'Are you sure?', :method => :delete, :class => :button %>
+					<% else %>
+						<%= link_to "Enter Marks", new_performance_path(:assessment_id => assessment.id, :enrollment_id => @enrollment.id), :class => :button %>
+					<% end %>
+				<% end %>
+			</td>
+		  </tr>
+		<% end %>
+	</table>
+
+	<%= render :partial => 'enrollments/sidebar' %>
+<% end %>
