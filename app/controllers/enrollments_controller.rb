@@ -25,7 +25,7 @@ class EnrollmentsController < ApplicationController
   # GET /enrollments/1
   # GET /enrollments/1.xml
   def show
-
+    @note = @enrollment.notes.build
     respond_to do |format|
       format.html # show.html.erb
       format.xml  { render :xml => @enrollment }

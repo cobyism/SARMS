@@ -116,3 +116,8 @@ td.actions {text-align: right;}
 
 span.attended { color: green; }
 span.not_attended { color: red; }
+
+.note span {font-weight: bold; }
+.note { border-left: 4px solid #fc0; }
+.note-content p { background: #fc0; padding: 10px 10px; margin-bottom: 5px; font-size: 16px; }
+.note-information { padding-left: 10px;}

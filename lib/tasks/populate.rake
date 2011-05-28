@@ -1,44 +1,20 @@
 namespace :db do
-  desc "Populate SARMS with an Administrator"
-  task :bootstrap => :environment do
-    require 'populator'
-    require 'faker'
-
-    #INSERT INTO "users" ("updated_at", "lastname", "password_hash", "is_faculty", "email", "password_salt", "is_admin", "firstname", "created_at", "status") VALUES ('2011-05-15 08:53:40.426761', '', '$2a$10$w3exUK//kO017D6OufJcjuSbo.Wj8RdmsKaiIfbSxwRsZdc3Qk1Cq', 't', 'admin@sarms.com', '$2a$10$w3exUK//kO017D6OufJcju', 't', 'Administrator', '2011-05-15 08:53:40.426761', 0)
-
-    # Create a new administrator account
-    # Email: admin@sarms.com
-    # Password: admin
-    admin = User.new(
-      :email => "admin@sarms.com",
-      :password => "admin",
-      :password_confirmation => "admin",
-      # :password_hash => "$2a$10$w3exUK//kO017D6OufJcjuSbo.Wj8RdmsKaiIfbSxwRsZdc3Qk1Cq",
-      # :password_salt => "$2a$10$w3exUK//kO017D6OufJcju",
-      :firstname => "System",
-      :lastname => "Administrator",
-      :is_active => true,
-      :is_faculty => true,
-      :is_admin => true
-    )
-    if admin.save
-      puts "Administrator created!"
-    else
-      puts "Could not create administrator"
-    end
-  end
-
   desc "Populate with test data"
   task :populate => :environment do
     require 'populator'
     require 'faker'
     
-    [User.where('email != ?', "admin@sarms.com"), Unit, Enrollment, FacultyAssignment, Activity, Assessment].each(&:delete_all)
+    [User.where('email != ?', "admin@sarms.com"), Unit, Enrollment, FacultyAssignment, Activity, Assessment, Attendance, Performance, Note, AtRiskEvent, Response].each(&:delete_all)
     
     User.populate 40 do |user|
       user.firstname = Faker::Name.first_name
       user.lastname = Faker::Name.last_name
       user.email = Faker::Internet.email
+      user.title = Faker::Name.prefix
+      user.phone = Faker::PhoneNumber.phone_number
+      user.mobile = Faker::PhoneNumber.phone_number
+      user.address = "#{Faker::Address.street_address}\n#{Faker::Address.city}\n#{Faker::Address.us_state}\n#{Faker::Address.zip_code}"
+      user.exam_location = ['GLCDQ', 'ROCDQ', 'HOBDT', 'MELDV', 'WRRV', 'MELDV', 'WRRV']
       user.is_active = true
       user.is_admin = false
       user.is_faculty = false
@@ -50,6 +26,10 @@ namespace :db do
       user.firstname = Faker::Name.first_name
       user.lastname = Faker::Name.last_name
       user.email = Faker::Internet.email
+      user.title = Faker::Name.prefix
+      user.phone = Faker::PhoneNumber.phone_number
+      user.mobile = Faker::PhoneNumber.phone_number
+      user.address = "#{Faker::Address.street_address}\n#{Faker::Address.city}\n#{Faker::Address.us_state}\n#{Faker::Address.zip_code}"
       user.is_active = true
       user.is_admin = false
       user.is_faculty = true
@@ -61,6 +41,10 @@ namespace :db do
       user.firstname = Faker::Name.first_name
       user.lastname = Faker::Name.last_name
       user.email = Faker::Internet.email
+      user.title = Faker::Name.prefix
+      user.phone = Faker::PhoneNumber.phone_number
+      user.mobile = Faker::PhoneNumber.phone_number
+      user.address = "#{Faker::Address.street_address}\n#{Faker::Address.city}\n#{Faker::Address.us_state}\n#{Faker::Address.zip_code}"
       user.is_active = true
       user.is_admin = true
       user.is_faculty = true
@@ -69,8 +53,8 @@ namespace :db do
     end
     
     Unit.populate 12 do |unit|
-      unit.code = ["MSC228", "SIT321", "SIT282", "SIT384", "SIT772", "MSC337", "SIT190", "SIT112", "SIT180", "SIT358", "MSC722", "SIT289", "SIT661", "SIT934", "SIT013"]
-      unit.name = ["Intro to Subject", "Advanced Subject", "Subject Management", "Zen and the Art of Subject"]
+      unit.code = ["MSC228", "SIT321", "SIT282", "SIT384", "SIT772", "MSC337", "SIT190", "SIT112", "SIT180", "SIT358", "MSC722", "SIT289", "SIT661", "SIT934", "SIT013", "MSC223", "SIT311", "SIT286", "SIT324", "SIT712", "MSC137", "SIT140", "SIT172", "SIT110", "SIT318", "MSC122", "SIT299", "SIT691", "SIT134", "SIT113"]
+      unit.name = ["Intro to Subject", "Advanced Subject", "Subject Management", "Zen and the Art of Subject", "Intro to Art History", "Advanced Drawing", "Scope Management", "Zen and the Art of Painting Walls", "Intro to Modern History", "Advanced Database Systems", "Project Management", "Zen and the Art of Playing Warcraft", "Intro to Planking", "Advanced Planking", "Scope Management", "Zen and the Art of Planking"]
       unit.begins_at = ["1/3/2012".to_datetime, "1/7/2012".to_datetime, "1/11/2012".to_datetime]
       unit.ends_at = unit.begins_at + 3.months
       unit.term = [1, 2, 3]
@@ -78,9 +62,20 @@ namespace :db do
       unit.updated_at = unit.created_at..Time.now
       start_date = unit.created_at
       weekly = start_date
+      i = 1
       Activity.populate 12 do |activity|
         activity.unit_id = unit.id
-        activity.name = ["Lecture", "Lecture", "Lecture", "Tutorial"]
+        activity.name = "Lecture #{i}"
+        activity.created_at = start_date
+        activity.updated_at = start_date
+        activity.date = weekly
+        weekly += 1.week
+      end
+      weekly = start_date
+      i = 1
+      Activity.populate 8 do |activity|
+        activity.unit_id = unit.id
+        activity.name = "Tutorial #{i}"
         activity.created_at = start_date
         activity.updated_at = start_date
         activity.date = weekly
@@ -112,6 +107,43 @@ namespace :db do
       Enrollment.populate 3..4 do |enrollment|
         enrollment.user_id = student.id
         enrollment.unit_id = 1..Unit.all.count
+        enrollment.created_at = 2.years.ago..Time.now
+        count = 1
+        Unit.find(enrollment.unit_id).activities.each do |activity|
+          if rand(20) > 1
+            Attendance.populate 1 do |attendance|
+              attendance.enrollment_id = enrollment.id
+              attendance.activity_id = activity.id
+            end
+          end
+          count += 1
+          count = 1 if count == 12
+        end
+        count = 1
+        Unit.find(enrollment.unit_id).assessments.each do |assessment|
+          if rand(20) > 1
+            Performance.populate 1 do |performance|
+              performance.enrollment_id = enrollment.id
+              performance.assessment_id = assessment.id
+              performance.achieved_mark = assessment.total_marks - rand(assessment.total_marks * 0.75)
+            end
+          end
+          count += 1
+          count = 1 if count == 12
+        end
+        Note.populate 0..4 do |note|
+          note.enrollment_id = enrollment.id
+          note.user_id = User.faculty.find(:first, :offset =>rand(User.faculty.count))
+          note.content = [
+            "This student has been consistently absent from activities",
+            "This student has been somewhat absent from activities",
+            "Hi there, can you please contact your lecturer for this subject?",
+            "Where have you been! I tried to give you your marks back for your assignment, but you haven't been at class!",
+            "Excellent student. Thanks for your great participation in class this week",
+            "About that question you had, I found an example. Come and see me in my office and I'll explain it to you."
+            ]
+          note.created_at = enrollment.created_at..Time.now
+        end
       end
     end
     
@@ -121,12 +153,7 @@ namespace :db do
         faculty_assignment.unit_id = 1..Unit.all.count
       end
     end
-    
-  end
 
-  desc "Populate with test data"
-  task :wipe => :environment do
-    [User, Unit, Enrollment, FacultyAssignment, Activity, Assessment].each(&:delete_all)
   end
 end
 

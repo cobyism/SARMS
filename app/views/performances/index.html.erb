@@ -3,17 +3,22 @@
 
 	<table>
 		<% @assessments.each do |assessment| %>
+		<% @performance = get_performance(@enrollment, assessment) %>
 		<tr class='separator'>
 		    <td>
 				<strong><%= assessment.name %></strong><br />
-				<%= assessment.due %>
-			</td>
-		    <td>
-				Weight: <%= assessment.weight.to_i %>%<br />
+				<%= assessment.due %><br />
+				Weight: <%= assessment.weight.to_i %>% |
 				<%= assessment.total_marks.to_i %> Marks
 			</td>
+			<td>
+				<% if @performance %>
+					<%= @performance.grade_in_words %>
+				<% else %>
+					Not completed
+				<% end %>
+			</td>
 		    <td class='actions'>
-				<% @performance = get_performance(@enrollment, assessment) %>
 				<% if @performance %>
 					<%= @performance.result %>
 					<%= link_to 'Remove Result', @performance, :confirm => 'Are you sure?', :method => :delete, :class => :button %>
@@ -34,12 +39,19 @@
 
 	<table>
 		<% @enrollments.each do |enrollment| %>
+		<% @performance = get_performance(enrollment, @assessment) %>
 		<tr class='separator'>
 		    <td>
 				<strong><%= enrollment.user.full_name %></strong>
 			</td>
+			<td>
+				<% if @performance %>
+					<%= @performance.grade_in_words %>
+				<% else %>
+					Not completed
+				<% end %>
+			</td>
 		    <td class='actions'>
-				<% @performance = get_performance(enrollment, @assessment) %>
 				<% if @performance %>
 					<%= @performance.result %>
 					<%= link_to 'Remove Result', @performance, :confirm => 'Are you sure?', :class => :button %>

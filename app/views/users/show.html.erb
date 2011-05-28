@@ -2,7 +2,7 @@
 	<%= link_to "Edit", edit_user_path(@user), :class => :button %>
 </div>
 
-<h1><%= @user.full_name %></h1>
+<h1><%= @user.title %> <%= @user.full_name %></h1>
 
 <dl>
 	<dt>Email</dt>
@@ -13,6 +13,21 @@
 
     <dt>Status</dt>
 	<dd><%= @user.status %></dd>
+	
+	<dt>Exam location</dt>
+	<dd><%= @user.exam_location %></dd>
+	
+	<dt>Course code</dt>
+	<dd><%= @user.course_code %></dd>
+	
+	<dt>Phone</dt>
+	<dd><%= @user.phone %></dd>
+	
+	<dt>Mobile</dt>
+	<dd><%= @user.mobile %></dd>
+	
+	<dt>Address</dt>
+	<dd><%= simple_format(@user.address) %></dd>
 
 </dl>
 

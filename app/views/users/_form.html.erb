@@ -16,6 +16,10 @@
     <%= f.text_field :email %>
   </div>
   <div class="field">
+    <%= f.label :title %><br />
+    <%= f.select :title, [['Mr.'], ['Mrs.'], ['Ms.'], ['Miss'], ['Dr.']], :prompt => true %>
+  </div>
+  <div class="field">
     <%= f.label :firstname %><br />
     <%= f.text_field :firstname %>
   </div>
@@ -24,21 +28,58 @@
     <%= f.text_field :lastname %>
   </div>
   <div class="field">
-    <%= f.label :is_active, "Status" %><br />
-    <%= f.select :is_active, [['Active', true], ['Suspended', false]] %>
+    <%= f.label :phone %><br />
+    <%= f.text_field :phone %>
+  </div>
+  <div class="field">
+    <%= f.label :mobile %><br />
+    <%= f.text_field :mobile %>
+  </div>
+  <div class="field">
+    <%= f.label :address %><br />
+    <%= f.text_area :address, :rows => 5 %>
+  </div>
+  <div class="field">
+    <%= f.label :exam_location %><br />
+    <%= f.select :exam_location, [['Canberra', 'CANDA'],
+	['Coffs Harbour', 'CHBDN'],
+	['Lismore', 'LISDN'],
+	['Newcastle', 'NEWDN'],
+	['Port Macquarie', 'PTMDN'],
+	['Sydney', 'SYDDN'],
+	['Sydney West', 'SYWDN'],
+	['Wollongong', 'WOLDN', ''],
+	['Alice Springs', 'ALIDY'],
+	['Darwin', 'DARDY'],
+	['Brisbane', 'BRIDQ'],
+	['Cairns', 'CAIDQ'],
+	['Gold Coast', 'GLCDQ'],
+	['Mackay', 'MCKDQ'],
+	['Rockhampton', 'ROCDQ'],
+	['Sunshine Coast', 'SUNDQ'],
+	['Toowoomba', 'TOODQ'],
+	['Townsville', 'TOWDQ'],
+	['Adelaide', 'ADEDS'],
+	['Hobart', 'HOBDT'],
+	['Launceston', 'LAUDT'],
+	['Ballarat', 'BALDV'],
+	['Bendigo', 'BENDV'],
+	['Geelong', 'GEEV'],
+	['Melbourne', 'MELDV'],
+	['Warrnambool', 'WRRV']], :prompt => true %>
+  </div>
+  <div class="field">
+    <%= f.label :course_code %><br />
+    <%= f.text_field :course_code, :size => 5 %>
   </div>
   <div class="field">
     <%= f.label :role, "Role" %><br />
     <%= f.select :role, [['Student'], ['Faculty'], ['Administrator']] %>
   </div>
-  <!-- <div class="field">
-    <%= f.label :is_faculty %><br />
-    <%= f.check_box :is_faculty %>
-  </div>
   <div class="field">
-    <%= f.label :is_admin %><br />
-    <%= f.check_box :is_admin %>
-  </div> -->
+    <%= f.label :is_active, "Status" %><br />
+    <%= f.select :is_active, [['Active', true], ['Suspended', false]] %>
+  </div>
   <div class="field">
     <%= f.label :password %><br />
     <%= f.password_field :password %>

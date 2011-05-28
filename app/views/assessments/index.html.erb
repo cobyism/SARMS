@@ -8,11 +8,14 @@
   <tr class='separator'>
     <td>
 		<strong><%= assessment.name %></strong><br />
-		<%= assessment.due %>
+		<%= assessment.due %><br />
+		Weight: <%= assessment.weight.to_i %>% | 
+		<%= assessment.total_marks.to_i %> Marks
 	</td>
     <td>
-		Weight: <%= assessment.weight.to_i %>%<br />
-		<%= assessment.total_marks.to_i %> Marks
+		Average Result: <%= assessment.average_percentage %>%<br />
+		Highest: <%= assessment.highest_percentage %>%<br />
+		Lowest: <%= assessment.lowest_percentage %>%<br />
 	</td>
     <td class='actions'>
 		<%= link_to 'Performance', assessment_performances_path(assessment), :class => :button %>
