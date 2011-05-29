@@ -16,11 +16,11 @@
 					<p>Student At-Risk Monitoring System</p>
 				</div>
                 <% if current_user%>
-                  <div id="userbox" class="grid5">
-                    <p>Signed in as <%= current_user.email %> |
-                    <%= link_to "Sign out", sign_out_path %></p>
-					<%# <p>Welcome, <a href="">Coby Chapple</a> | <a href="">My Account</a> | <a href="">Sign-out</a></p>%>
-                  </div>
+					<% content_for :sidebar do %>
+						<h2>My Account</h2>
+						<%= link_to "View Details", user_path(current_user), :class => :button %>
+						<%= link_to "Sign out", sign_out_path, :class => :button %>
+					<% end %>
                 <% end %>
 			</div>
 		</div>
