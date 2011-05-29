@@ -6,7 +6,7 @@ namespace :db do
     
     [User.where('email != ? and email != ? and email != ?', "admin@sarms.com", "faculty@sarms.com", "student@sarms.com"), Unit, Enrollment, FacultyAssignment, Activity, Assessment, Attendance, Performance, Note, AtRiskEvent, Response].each(&:delete_all)
     
-    User.populate 40 do |user|
+    User.populate 92 do |user|
       user.firstname = Faker::Name.first_name
       user.lastname = Faker::Name.last_name
       user.email = Faker::Internet.email
@@ -22,7 +22,7 @@ namespace :db do
       user.updated_at = user.created_at..Time.now
     end
     
-    User.populate 12 do |user|
+    User.populate 25 do |user|
       user.firstname = Faker::Name.first_name
       user.lastname = Faker::Name.last_name
       user.email = Faker::Internet.email
@@ -37,7 +37,7 @@ namespace :db do
       user.updated_at = user.created_at..Time.now
     end
     
-    User.populate 4 do |user|
+    User.populate 7 do |user|
       user.firstname = Faker::Name.first_name
       user.lastname = Faker::Name.last_name
       user.email = Faker::Internet.email
@@ -52,7 +52,7 @@ namespace :db do
       user.updated_at = user.created_at..Time.now
     end
     
-    Unit.populate 12 do |unit|
+    Unit.populate 38 do |unit|
       unit.code = ["MSC228", "SIT321", "SIT282", "SIT384", "SIT772", "MSC337", "SIT190", "SIT112", "SIT180", "SIT358", "MSC722", "SIT289", "SIT661", "SIT934", "SIT013", "MSC223", "SIT311", "SIT286", "SIT324", "SIT712", "MSC137", "SIT140", "SIT172", "SIT110", "SIT318", "MSC122", "SIT299", "SIT691", "SIT134", "SIT113"]
       unit.name = ["Intro to Subject", "Advanced Subject", "Subject Management", "Zen and the Art of Subject", "Intro to Art History", "Advanced Drawing", "Scope Management", "Zen and the Art of Painting Walls", "Intro to Modern History", "Advanced Database Systems", "Project Management", "Zen and the Art of Playing Warcraft", "Intro to Planking", "Advanced Planking", "Scope Management", "Zen and the Art of Planking"]
       unit.begins_at = ["1/3/2012".to_datetime, "1/7/2012".to_datetime, "1/11/2012".to_datetime]

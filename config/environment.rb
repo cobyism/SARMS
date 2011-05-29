@@ -6,3 +6,5 @@ SARMS::Application.initialize!
 
 
 Time::DATE_FORMATS[:unit] = "%A, %B %d, %Y"
+
+require 'will_paginate'

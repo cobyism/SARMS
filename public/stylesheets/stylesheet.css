@@ -139,3 +139,14 @@ span.not_attended { color: red; }
 .response h3 { background: #0cF; padding: 10px 10px; margin: 0; font-size: 16px; }
 .response p { background: #0cF; padding: 0px 10px 10px; margin: 0; font-size: 16px; }
 .response_information { padding-left: 10px; margin-top: 5px;}
+
+
+
+.pagination { padding: 3px; margin: 10px 0px; text-align: left; } 
+.pagination a { padding: 2px 5px 2px 5px; margin: 2px; border: 1px solid #aaaadd; text-decoration: none; color: #000099; } 
+.pagination a:hover, 
+.pagination a:active { border: 1px solid #000099; color: #000; } 
+.pagination span.current { padding: 2px 5px 2px 5px; margin: 2px; border: 1px solid #000099; font-weight: bold; background-color: #000099; color: #FFF; } 
+.pagination span.disabled { padding: 2px 5px 2px 5px; margin: 2px; border: 1px solid #eee; color: #ddd; }
+
+/* From http://workingwithrails.com/railsplugin/4765-will-paginate */

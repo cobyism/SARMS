@@ -2,18 +2,19 @@ class UnitsController < ApplicationController
   # GET /units
   # GET /units.xml
   def index
-    @units = Unit.all
+    per_page = 10
+    @units = Unit.all.paginate :page => params[:page], :per_page => per_page
     if params[:trimester] == '1'
-      @units = Unit.where('term = 1')
+      @units = Unit.where('term = 1').paginate :page => params[:page], :per_page => per_page
       @title = "Trimester 1 Units"
     elsif params[:trimester] == '2'
-      @units = Unit.where('term = 2')
+      @units = Unit.where('term = 2').paginate :page => params[:page], :per_page => per_page
       @title = "Trimester 2 Units"
     elsif params[:trimester] == '3'
-      @units = Unit.where('term = 3')
+      @units = Unit.where('term = 3').paginate :page => params[:page], :per_page => per_page
       @title = "Trimester 3 Units"
     else
-      @units = Unit.all
+      @units = Unit.all.paginate :page => params[:page], :per_page => per_page
       @title = "All Units"
     end
 

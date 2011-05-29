@@ -5,17 +5,18 @@ class UsersController < ApplicationController
   before_filter :authenticate_user!
 
   def index
+    per_page = 10
     if params[:scope] == 'students'
-      @users = User.students.all
+      @users = User.students.all.paginate :page => params[:page], :per_page => per_page
       @title = "Students"
     elsif params[:scope] == 'faculty'
-      @users = User.faculty.all
+      @users = User.faculty.all.paginate :page => params[:page], :per_page => per_page
       @title = "Faculty"
     elsif params[:scope] == 'admins'
-      @users = User.admins.all
+      @users = User.admins.all.paginate :page => params[:page], :per_page => per_page
       @title = "Administrators"
     else
-      @users = User.all
+      @users = User.all.paginate :page => params[:page], :per_page => per_page
       @title = "All Users"
     end
 

@@ -4,6 +4,8 @@
 
 <h1><%= @title %></h1>
 
+<%= will_paginate @units %>
+
 <table>
 	<% @units.each do |unit| %>
 	  <tr class='separator'>
@@ -16,6 +18,8 @@
 	  </tr>
 	<% end %>
 </table>
+
+<%= will_paginate @units %>
 
 <% content_for :sidebar do %>
 	<h2>Filter Units</h2>

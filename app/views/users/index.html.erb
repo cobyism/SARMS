@@ -4,6 +4,8 @@
 
 <h1><%= @title %></h1>
 
+<%= will_paginate @users %>
+
 <table>
 	<% @users.each do |user| %>
 	<tr class='separator'>
@@ -29,5 +31,7 @@
 	</tr>
 	<% end %>
 </table>
+
+<%= will_paginate @users %>
 
 <%= render :partial => 'index_sidebar' %>
