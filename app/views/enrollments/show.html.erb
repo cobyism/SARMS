@@ -1,12 +1,52 @@
 <h1>Enrollment Overview</h1>
 <dl>
 	<dt>Student</dt>
-	<dd><%= link_to @enrollment.user.full_name, @enrollment.user %> </dd>
+	<dd><%= link_to @enrollment.user.full_name, @enrollment.user %></dd>
 	<dt>Unit</dt>
 	<dd><%= link_to @enrollment.unit.code, @enrollment.unit %></dd>
 	<dt>Enrolled on</dt>
 	<dd><%= @enrollment.created_at.strftime("%A, %e %B, %Y") %></dd>
 </dl>
+
+<% if @enrollment.at_risk_events.count > 0 %>
+	<% @at_risk_event = @enrollment.at_risk_events.first %>
+	<h2>At-Risk Notification</h2>
+	<div id="error_explanation" class='with_button'>
+		<h2>This enrollment has been deemed to be at-risk because:</h2>
+		<ul>
+			<% @enrollment.at_risk_reasons.each do |r| %>
+				<li><%= r %></li>
+			<% end %>
+		</ul>
+		<% unless @at_risk_event.response_received? %>
+			<%= link_to 'Add Response', new_at_risk_event_response_path(@at_risk_event), :class => :button %>
+		<% end %>
+		<div class="clear"></div>
+	</div>
+	<% if @at_risk_event.response_received? %>
+		<% @response = @at_risk_event.responses.first %>
+		<h2>Student Response</h2>
+		<div class='student_response'>
+			<div class='response'>
+				<h3><%= @response.response %></h3>
+				<% unless @response.comment.blank? %><p><%= @response.comment %></p><% end %>
+			</div>
+			<div class='response_information'>
+				Response added <span><%= time_ago_in_words(@response.created_at) %> ago</span> by <span><%= @response.user.full_name %></span> | <%= link_to "Delete Response", @response, :method => :delete, :confirm => "Are you sure?" %>
+			</div>
+		</div>
+	<% end %>
+<% elsif @enrollment.is_at_risk? %>
+	<h2>Warning</h2>
+	<div id="error_explanation">
+		<h2>You should discuss the following with a member of faculty immediately:</h2>
+		<ul>
+			<% @enrollment.at_risk_reasons.each do |r| %>
+				<li><%= r %></li>
+			<% end %>
+		</ul>
+	</div>
+<% end %>
 
 <h2>Notes</h2>
 <% @enrollment.notes.each do |note| %>

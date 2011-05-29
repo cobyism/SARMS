@@ -1,5 +1,19 @@
-<h1>New response</h1>
+<h1>At-Risk Notification</h1>
+
+<dl>
+	<dt>Enrollment</dt>
+	<dd><%= @enrollment.full_name %></dd>
+</dl>
+
+<div id="error_explanation">
+	<h2>This enrollment has been deemed to be at-risk because:</h2>
+	<ul>
+		<% @enrollment.at_risk_reasons.each do |r| %>
+			<li><%= r %></li>
+		<% end %>
+	</ul>
+</div>
+
+<h2>Add Response</h2>
 
 <%= render 'form' %>
-
-<%= link_to 'Back', responses_path %>

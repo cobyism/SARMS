@@ -1,4 +1,7 @@
 class ResponsesController < ApplicationController
+  
+  before_filter :find_at_risk_event
+  
   # GET /responses
   # GET /responses.xml
   def index
@@ -24,7 +27,7 @@ class ResponsesController < ApplicationController
   # GET /responses/new
   # GET /responses/new.xml
   def new
-    @response = Response.new
+    @response = @at_risk_event.responses.build
 
     respond_to do |format|
       format.html # new.html.erb
@@ -41,10 +44,11 @@ class ResponsesController < ApplicationController
   # POST /responses.xml
   def create
     @response = Response.new(params[:response])
+    @enrollment = @response.at_risk_event.enrollment
 
     respond_to do |format|
       if @response.save
-        format.html { redirect_to(@response, :notice => 'Response was successfully created.') }
+        format.html { redirect_to(@enrollment, :notice => 'Response was successfully created.') }
         format.xml  { render :xml => @response, :status => :created, :location => @response }
       else
         format.html { render :action => "new" }
@@ -73,11 +77,21 @@ class ResponsesController < ApplicationController
   # DELETE /responses/1.xml
   def destroy
     @response = Response.find(params[:id])
+    @enrollment = @response.at_risk_event.enrollment
     @response.destroy
 
     respond_to do |format|
-      format.html { redirect_to(responses_url) }
+      format.html { redirect_to(@enrollment, :notice => 'Response was successfully removed.') }
       format.xml  { head :ok }
+    end
+  end
+  
+  private
+  
+  def find_at_risk_event
+    if params[:at_risk_event_id]
+      @at_risk_event = AtRiskEvent.find(params[:at_risk_event_id])
+      @enrollment = @at_risk_event.enrollment
     end
   end
 end

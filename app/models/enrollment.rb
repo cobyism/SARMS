@@ -42,8 +42,8 @@ class Enrollment < ActiveRecord::Base
   
   def at_risk_reasons
     reasons = Array.new
-    reasons << "Has not attended more than half of the activities." unless self.has_attended_enough
-    reasons << "Has not completed one or more assessment items." unless self.has_submitted_all_assignments
+    reasons << "More than half of the activities have not been attended." unless self.has_attended_enough
+    reasons << "One or more assessment items are not complete." unless self.has_submitted_all_assignments
     reasons << "Not at risk." if self.has_attended_enough && self.has_submitted_all_assignments
     return reasons
   end

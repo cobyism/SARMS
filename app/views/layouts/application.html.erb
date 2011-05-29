@@ -18,6 +18,14 @@
                 <% if current_user%>
 					<% content_for :sidebar do %>
 						<h2>My Account</h2>
+						<dl>
+							<dt>Signed in as</dt>
+							<dd><%= current_user.full_name %></dd>
+							<dt>Email</dt>
+							<dd><%= current_user.email %></dd>
+							<dt>Role</dt>
+							<dd><%= current_user.role %></dd>
+						</dl>
 						<%= link_to "View Details", user_path(current_user), :class => :button %>
 						<%= link_to "Sign out", sign_out_path, :class => :button %>
 					<% end %>
