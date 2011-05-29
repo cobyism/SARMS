@@ -128,6 +128,9 @@ class PerformancesController < ApplicationController
     if @enrollment
       @assessments = @enrollment.unit.assessments.all
     end
+    if params[:enrollment_id]
+      @assessments = Enrollment.find(params[:enrollment_id]).unit.assessments.all
+    end
   end
   
   def find_enrollments
