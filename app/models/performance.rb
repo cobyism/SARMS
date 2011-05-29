@@ -3,9 +3,7 @@ class Performance < ActiveRecord::Base
   belongs_to :enrollment
   
   validates_uniqueness_of :enrollment_id, :scope => :assessment_id
-  validates_presence_of :enrollment_id
-  validates_presence_of :assessment_id
-  validates_presence_of :achieved_mark
+  validates_presence_of :enrollment_id, :assessment_id, :achieved_mark
   
   def result
     percentage = self.percentage.round(2)

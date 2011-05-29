@@ -3,6 +3,9 @@ class Assessment < ActiveRecord::Base
   belongs_to :enrollment
   has_many :performances, :dependent => :destroy
   
+  validates_presence_of :unit_id, :name, :type, :due_at, :total_marks, :weight
+  validates_numericality_of :total_marks, :weight
+  
   def due
     self.due_at.strftime("Due %I:%M%p, %A, %e %B %Y") if self.due_at
   end

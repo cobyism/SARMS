@@ -17,17 +17,11 @@ end
     </div>
   <% end %>
 
-  <div class="field">
-    <%= f.label :unit_id %><br />
-    <%= f.text_field :unit_id %>
-  </div>
+    <%= f.hidden_field :unit_id %>
+    <%= f.hidden_field :type %>
   <div class="field">
     <%= f.label :name %><br />
     <%= f.text_field :name %>
-  </div>
-  <div class="field">
-    <%= f.label :type %><br />
-    <%= f.text_field :type %>
   </div>
   <div class="field">
     <%= f.label :due_at, 'Due at (Date, Time)' %><br />

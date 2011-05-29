@@ -4,7 +4,7 @@ namespace :db do
     require 'populator'
     require 'faker'
     
-    [User.where('email != ?', "admin@sarms.com"), Unit, Enrollment, FacultyAssignment, Activity, Assessment, Attendance, Performance, Note, AtRiskEvent, Response].each(&:delete_all)
+    [User.where('email != ? and email != ? and email != ?', "admin@sarms.com", "faculty@sarms.com", "student@sarms.com"), Unit, Enrollment, FacultyAssignment, Activity, Assessment, Attendance, Performance, Note, AtRiskEvent, Response].each(&:delete_all)
     
     User.populate 40 do |user|
       user.firstname = Faker::Name.first_name

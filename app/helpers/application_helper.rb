@@ -18,4 +18,5 @@ module ApplicationHelper
     return 'current' if params[:scope] == scope
     ''
   end
+  
 end

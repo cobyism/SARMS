@@ -32,10 +32,3 @@
 <% end %>
 
 <%= render :partial => 'sidebar' %>
-
-
-<% content_for :sidebar do %>
-	<h2>Actions</h2>
-	<%= link_to "Notify all Students At-Risk", monitor_at_risk_events_path, :class => :button %>
-	</ul>
-<% end %>

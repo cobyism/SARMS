@@ -4,6 +4,8 @@ class Unit < ActiveRecord::Base
   has_many :activities, :dependent => :destroy
   has_many :assessments, :dependent => :destroy
   
+  validates_presence_of :code, :name, :begins_at, :ends_at, :term
+  
   def full_name
     "#{self.code}—#{self.name}"
   end

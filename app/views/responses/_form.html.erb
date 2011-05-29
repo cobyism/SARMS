@@ -12,6 +12,7 @@
   <% end %>
 
 <% @response.user_id = current_user.id %>
+<% @response.user_id = @at_risk_event.enrollment.user.id #TODO take me out for production! %>
 
     <%= f.hidden_field :user_id %>
     <%= f.hidden_field :at_risk_event_id %>
@@ -31,6 +32,6 @@
     <%= f.text_area :comment, :rows => 4, :cols => 60 %>
   </div>
   <div class="actions">
-    <%= f.submit %> or <%= link_to "cancel", :back %>
+    <%= f.submit %> or <%= link_to "cancel", @at_risk_event.enrollment %>
   </div>
 <% end %>

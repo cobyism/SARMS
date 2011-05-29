@@ -8,7 +8,6 @@ class User < ActiveRecord::Base
 
   validates_confirmation_of :password
   validates_presence_of :password, :on => :create
-  validates_presence_of :email
   validates_uniqueness_of :email
 
   validates_presence_of :firstname, :lastname, :email
@@ -18,7 +17,6 @@ class User < ActiveRecord::Base
   named_scope :students, :conditions => { :is_admin => false, :is_faculty => false }
   named_scope :faculty, :conditions => { :is_admin => false, :is_faculty => true }
   named_scope :admins, :conditions => { :is_admin => true, :is_faculty => true }
-
 
   def role
     if self.is_admin

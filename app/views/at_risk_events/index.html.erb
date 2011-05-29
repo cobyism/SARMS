@@ -8,6 +8,7 @@
 			<td>
 				<%= at_risk_event.enrollment.full_name %>
 			</td>
+			<td>Notified <%= time_ago_in_words(at_risk_event.created_at) %> ago
 			<td class='actions'>
 				<%= link_to 'View Enrollment', at_risk_event.enrollment, :class => :button %>
 			</td>
@@ -24,6 +25,7 @@
 			<td>
 				<%= at_risk_event.enrollment.full_name %>
 			</td>
+			<td>Responded <%= time_ago_in_words(at_risk_event.responses.first.created_at) %> ago</td>
 			<td class='actions'>
 				<%= link_to 'View Enrollment', at_risk_event.enrollment, :class => :button %>
 			</td>

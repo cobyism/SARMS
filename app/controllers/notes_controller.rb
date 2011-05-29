@@ -47,7 +47,7 @@ class NotesController < ApplicationController
         format.html { redirect_to(@note.enrollment, :notice => 'Note was successfully created.') }
         format.xml  { render :xml => @note, :status => :created, :location => @note }
       else
-        format.html { render :action => "new" }
+        format.html { redirect_to(@note.enrollment, :alert => 'Your note was empty! Please try again.') }
         format.xml  { render :xml => @note.errors, :status => :unprocessable_entity }
       end
     end
