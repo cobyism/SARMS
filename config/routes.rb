@@ -3,6 +3,11 @@ SARMS::Application.routes.draw do
 
   resources :faculty_assignments
   resources :performances
+  resources :at_risk_events do
+    collection do
+      get 'monitor'
+    end
+  end
 
   resources :enrollments do
       resources :notes, :shallow => true

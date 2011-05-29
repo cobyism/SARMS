@@ -36,6 +36,9 @@
 				<div class="grid2">
 					<div class="navitem <%= current_if('units') %>"><%= link_to "Units", units_path %></div>
 				</div>
+				<div class="grid2">
+					<div class="navitem <%= current_if('at_risk_events') %>"><%= link_to "Students At-Risk", monitor_at_risk_events_path %></div>
+				</div>
 			</div>
 		</div>
       <% end %>

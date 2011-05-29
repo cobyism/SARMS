@@ -24,5 +24,28 @@ class Enrollment < ActiveRecord::Base
   def full_name
     "#{self.user.full_name} → #{self.unit.code}"
   end
+  
+  def has_attended_enough
+    attendance_count = self.attendances.count
+    return attendance_count > (self.unit.activities.count / 2)
+  end
+  
+  def has_submitted_all_assignments
+    performances_count = self.performances.count
+    return performances_count == self.unit.assessments.count
+  end
+  
+  def is_at_risk?
+    return true unless self.has_attended_enough && self.has_submitted_all_assignments
+    return false
+  end
+  
+  def at_risk_reasons
+    reasons = Array.new
+    reasons << "Has not attended more than half of the activities." unless self.has_attended_enough
+    reasons << "Has not completed one or more assessment items." unless self.has_submitted_all_assignments
+    reasons << "Not at risk." if self.has_attended_enough && self.has_submitted_all_assignments
+    return reasons
+  end
 
 end

@@ -110,7 +110,7 @@ namespace :db do
         enrollment.created_at = 2.years.ago..Time.now
         count = 1
         Unit.find(enrollment.unit_id).activities.each do |activity|
-          if rand(20) > 1
+          if rand(8) > 1
             Attendance.populate 1 do |attendance|
               attendance.enrollment_id = enrollment.id
               attendance.activity_id = activity.id
@@ -121,7 +121,7 @@ namespace :db do
         end
         count = 1
         Unit.find(enrollment.unit_id).assessments.each do |assessment|
-          if rand(20) > 1
+          if rand(80) > 1
             Performance.populate 1 do |performance|
               performance.enrollment_id = enrollment.id
               performance.assessment_id = assessment.id
