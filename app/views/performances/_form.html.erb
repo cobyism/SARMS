@@ -1,4 +1,4 @@
-<%= form_for(@form_object) do |f| %>
+<%= form_for(@performance, :url => performances_path(@performance, :from => @from, :from_id => @from_id)) do |f| %>
   <% if @performance.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@performance.errors.count, "error") %> prohibited this performance from being saved:</h2>
@@ -14,6 +14,6 @@
     <%= f.hidden_field :enrollment_id %>
     <%= f.hidden_field :assessment_id %>
     <strong>Mark:</strong>
-    <%= f.text_field :achieved_mark, :size => 4 %> / <%= @assessment.total_marks %>
-    <%= f.submit 'Save' %> or <%= link_to 'cancel', :back %>
+    <%= f.text_field :achieved_mark, :size => 4 %> / <%= @total_marks %>
+    <%= f.submit 'Save' %>
 <% end %>

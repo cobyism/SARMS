@@ -27,9 +27,17 @@
 			<% if current_user.is_staff? %>
 			    <td class='actions'>
 					<% if @performance %>
-						<%= link_to 'Remove Result', @performance, :confirm => 'Are you sure?', :method => :delete, :class => :button %>
+						<%= link_to 'Remove Result', performance_path(@performance, :from => 'enrollment'), :confirm => 'Are you sure?', :method => :delete, :class => :button %>
 					<% else %>
-						<%= link_to "Enter Marks", new_performance_path(:assessment_id => assessment.id, :enrollment_id => @enrollment.id, :from => 'enrollment'), :class => :button %>
+						<% 
+						@performance = assessment.performances.build
+						@performance.enrollment_id = @enrollment.id
+						@total_marks = assessment.total_marks
+						@from = 'enrollment'
+						@from_id = @enrollment.id
+						%>
+						<%= render 'form' %>
+						<%# link_to "Enter Marks", new_performance_path(:assessment_id => assessment.id, :enrollment_id => @enrollment.id, :from => 'enrollment'), :class => :button %>
 					<% end %>
 				</td>
 			<% end %>
@@ -61,9 +69,18 @@
 			</td>
 		    <td class='actions'>
 				<% if @performance %>
-					<%= link_to 'Remove Result', @performance, :method => :delete, :confirm => 'Are you sure?', :class => :button %>
+					<%= link_to 'Remove Result', performance_path(@performance, :from => 'assessment'), :method => :delete, :confirm => 'Are you sure?', :class => :button %>
 				<% else %>
-					<%= link_to "Enter Marks", new_performance_path(:assessment_id => @assessment.id, :enrollment_id => enrollment.id, :from => 'assessment'), :class => :button %>
+					<% 
+					@performance = enrollment.performances.build
+					@performance.assessment_id = @assessment.id
+					@total_marks = @assessment.total_marks
+					@from = 'assessment'
+					@from_id = @assessment.id
+					%>
+					<%= render 'form' %>
+					<%# link_to "Enter Marks", new_performance_path(:assessment_id => @assessment.id, :enrollment_id => enrollment.id, :from => 'assessment'), :class => :button %>
+					
 				<% end %>
 			</td>
 		  </tr>

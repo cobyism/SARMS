@@ -12,11 +12,39 @@ class PerformancesController < ApplicationController
   # GET /performances.xml
   def index
     @performances = Performance.all
-    if @enrollment
-      @performance = @enrollment.performances.build
-    elsif
+    
+    if params[:assessment_id]
+      @assessment = Assessment.find(params[:assessment_id])
       @performance = @assessment.performances.build
+    elsif params[:enrollment_id]
+      @enrollment = Enrollment.find(params[:enrollment_id])
+      @performance = @enrollment.performances.build
     end
+    
+    if @enrollment
+      # @form_object = [@enrollment, @performance]
+      @form_object = @performance
+    else
+      @form_object = @performance
+    end
+    
+    
+    # if @enrollment
+    #       @enrollment = Enrollment.find(params[:enrollment_id])
+    #       @performance = @enrollment.performances.build
+    #     else
+    #       @enrollment = Enrollment.find(params[:enrollment_id])
+    #       @performance = @assessment.performances.build
+    #     end
+    #     
+    #     @performance = @assessment.performances.build
+    #     @enrollment = Enrollment.find(params[:enrollment_id])
+    #     @performance.enrollment_id = @enrollment.id
+    #     if @enrollment
+    #       @form_object = [@enrollment, @performance]
+    #     else
+    #       @form_object = @performance
+    #     end
 
     respond_to do |format|
       format.html # index.html.erb
@@ -59,10 +87,17 @@ class PerformancesController < ApplicationController
   # POST /performances.xml
   def create
     @performance = Performance.new(params[:performance])
+    
+    @redirect_path = @performance
+    if params[:from] == 'assessment'
+      @redirect_path = assessment_performances_path(Assessment.find(params[:from_id]))
+    elsif params[:from] == 'enrollment'
+      @redirect_path = enrollment_performances_path(Enrollment.find(params[:from_id]))
+    end
 
     respond_to do |format|
       if @performance.save
-        format.html { redirect_to(enrollment_performances_path(@enrollment), :notice => 'Performance was successfully created.') }
+        format.html { redirect_to(@redirect_path, :notice => 'Performance was successfully created.') }
         format.xml  { render :xml => @performance, :status => :created, :location => @performance }
       else
         format.html { render :action => "new" }
@@ -88,10 +123,16 @@ class PerformancesController < ApplicationController
   # DELETE /performances/1
   # DELETE /performances/1.xml
   def destroy
+    
+    @redirect_path = enrollment_performances_path(@performance.enrollment)
+    if params[:from] == 'assessment'
+      @redirect_path = assessment_performances_path(@performance.assessment)
+    end
+    
     @performance.destroy
 
     respond_to do |format|
-      format.html { redirect_to(enrollment_performances_path(@enrollment), :notice => "Result was successfully removed.") }
+      format.html { redirect_to(@redirect_path, :notice => "Result was successfully removed.") }
       format.xml  { head :ok }
     end
   end
