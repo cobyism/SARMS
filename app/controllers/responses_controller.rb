@@ -1,5 +1,6 @@
 class ResponsesController < ApplicationController
   
+  before_filter :authenticate_user!
   before_filter :find_at_risk_event
   before_filter :set_tab
   

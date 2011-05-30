@@ -2,7 +2,8 @@
 
 The Student At-Risk Monitoring System...
 
-- Link to App
+- accessing the app
+
 - sample login details
 	- student
 	- faculty member
@@ -11,6 +12,12 @@ The Student At-Risk Monitoring System...
 link to user manual PDF
 
 source code zip/github url
+
+credits
+
+license
+
+---
 
 Rails is a web-application framework that includes everything needed to create
 database-backed web applications according to the Model-View-Control pattern.

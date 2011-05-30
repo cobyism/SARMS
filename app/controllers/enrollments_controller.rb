@@ -1,5 +1,6 @@
 class EnrollmentsController < ApplicationController
   
+  before_filter :authenticate_user!
   before_filter :find_enrollment, :except => [:index, :new, :create]
   before_filter :find_user
   before_filter :find_unit

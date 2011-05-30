@@ -1,5 +1,6 @@
 class AttendancesController < ApplicationController
   
+  before_filter :authenticate_user!
   before_filter :find_attendance, :except => [:index, :new, :create]
   before_filter :find_enrollment
   before_filter :find_activity

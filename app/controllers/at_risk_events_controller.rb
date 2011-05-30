@@ -1,5 +1,6 @@
 class AtRiskEventsController < ApplicationController
   
+  before_filter :authenticate_user!
   before_filter :find_enrollment, :only => [:new, :create]
   before_filter :set_tab
   

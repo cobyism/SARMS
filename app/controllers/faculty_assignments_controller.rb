@@ -1,5 +1,6 @@
 class FacultyAssignmentsController < ApplicationController
   
+  before_filter :authenticate_user!
   before_filter :find_faculty_assignment, :except => [:index, :new, :create]
   before_filter :find_user
   before_filter :find_unit

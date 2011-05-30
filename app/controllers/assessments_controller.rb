@@ -1,5 +1,6 @@
 class AssessmentsController < ApplicationController
   
+  before_filter :authenticate_user!
   before_filter :find_assessment, :except => [:index, :new, :create]
   before_filter :find_unit
   before_filter :set_tab

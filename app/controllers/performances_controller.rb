@@ -1,5 +1,6 @@
 class PerformancesController < ApplicationController
   
+  before_filter :authenticate_user!
   before_filter :find_performance, :except => [:index, :new, :create]
   before_filter :find_enrollment
   before_filter :find_enrollments
