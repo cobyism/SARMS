@@ -1,3 +1,7 @@
+<div class="trb">
+	<%= link_to "Back", :back, :class => :button %>
+</div>
+
 <% if @enrollment %>
 	<h1><%= @enrollment.unit.code %> Attendance for <%= @enrollment.user.full_name %></h1>
 
@@ -7,14 +11,16 @@
 				<td><%= activity.name %></td>
 			    <td><%= activity.date.strftime("%A, %e %b %Y") %></td>
 				<td><%= attended_or_not(@enrollment, activity) %></td>
-				<td class='actions'>
-					<% if has_attended(@enrollment, activity) %>
-						<%= link_to 'Remove Attendance', get_attendance(@enrollment, activity), :method => :delete, :class => :button %>
-					<% else %>
-						<% @attendance.activity_id = activity.id %>
-						<%= render :partial => 'form' %>
-					<% end %>
-				</td>
+				<% if current_user.is_staff? %>
+					<td class='actions'>
+						<% if has_attended(@enrollment, activity) %>
+							<%= link_to 'Remove Attendance', get_attendance(@enrollment, activity), :method => :delete, :class => :button %>
+						<% else %>
+							<% @attendance.activity_id = activity.id %>
+							<%= render :partial => 'form' %>
+						<% end %>
+					</td>
+				<% end %>
 			</tr>
 		<% end %>
 	</table>

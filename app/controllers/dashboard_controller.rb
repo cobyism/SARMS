@@ -1,6 +1,7 @@
 class DashboardController < ApplicationController
 
   before_filter :authenticate_user!
+  before_filter :set_tab
 
   def index
     @count = {
@@ -11,6 +12,12 @@ class DashboardController < ApplicationController
       :units => Unit.count,
       }
     
+  end
+  
+  private
+  
+  def set_tab
+    @tab = 'dashboard'
   end
 
 end

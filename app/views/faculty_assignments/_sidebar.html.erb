@@ -1,0 +1,17 @@
+<% content_for :sidebar do %>
+	<h2><%= @faculty_assignment.full_name %></h2>
+	<ul>
+		<li><%= link_to "Unit Details", @faculty_assignment %></li>
+		<li><%= link_to "Enrolled Students", nil %></li>
+		<li><%= link_to "Assigned Faculty", nil %></li>
+		<li><%= link_to "Activities", nil %></li>
+		<li><%= link_to "Assessments", nil %></li>
+	</ul>
+	<h2>Actions</h2>
+	<% if current_user.is_admin? %>
+		<%= link_to "Switch Students", users_path(:scope => 'students'), :class => :button %>
+		<%= link_to "Switch Units", units_path, :class => :button %>
+	<% elsif current_user.is_faculty? %>
+		<%= link_to "Switch Units", user_faculty_assignments_path(current_user), :class => :button %>
+	<% end %>
+<% end %>

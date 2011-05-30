@@ -3,6 +3,7 @@ class Unit < ActiveRecord::Base
   has_many :faculty_assignments, :dependent => :destroy
   has_many :activities, :dependent => :destroy
   has_many :assessments, :dependent => :destroy
+  has_many :at_risk_events, :through => :enrollments
   
   validates_presence_of :code, :name, :begins_at, :ends_at, :term
   

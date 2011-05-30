@@ -1,4 +1,7 @@
 class NotesController < ApplicationController
+  
+  before_filter :set_tab
+  
   # GET /notes
   # GET /notes.xml
   def index
@@ -79,6 +82,16 @@ class NotesController < ApplicationController
     respond_to do |format|
       format.html { redirect_to(@enrollment, :notice => 'Note was successfully deleted.') }
       format.xml  { head :ok }
+    end
+  end
+  
+  private
+  
+  def set_tab
+    if current_user.is_faculty?
+      @tab = 'faculty_assignments'
+    else
+      @tab = 'units'
     end
   end
 end

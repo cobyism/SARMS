@@ -72,10 +72,12 @@
     <%= f.label :course_code %><br />
     <%= f.text_field :course_code, :size => 5 %>
   </div>
-  <div class="field">
-    <%= f.label :role, "Role" %><br />
-    <%= f.select :role, [['Student'], ['Faculty'], ['Administrator']] %>
-  </div>
+	<% if current_user.is_admin? %>
+	  <div class="field">
+	    <%= f.label :role, "Role" %><br />
+	    <%= f.select :role, [['Student'], ['Faculty'], ['Administrator']] %>
+	  </div>
+	<% end %>
   <div class="field">
     <%= f.label :is_active, "Status" %><br />
     <%= f.select :is_active, [['Active', true], ['Suspended', false]] %>

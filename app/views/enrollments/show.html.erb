@@ -1,9 +1,21 @@
 <h1>Enrollment Overview</h1>
 <dl>
 	<dt>Student</dt>
-	<dd><%= link_to @enrollment.user.full_name, @enrollment.user %></dd>
+	<dd>
+		<% if current_user.is_admin? %>
+			<%= link_to @enrollment.user.full_name, @enrollment.user %>
+		<% else %>
+			<%= @enrollment.user.full_name %>
+		<% end %>
+	</dd>
 	<dt>Unit</dt>
-	<dd><%= link_to @enrollment.unit.code, @enrollment.unit %></dd>
+	<dd>
+		<% if current_user.is_admin? %>
+			<%= link_to @enrollment.unit.code, @enrollment.unit %>
+		<% else %>
+			<%= @enrollment.unit.code %>
+		<% end %>
+	</dd>
 	<dt>Enrolled on</dt>
 	<dd><%= @enrollment.created_at.strftime("%A, %e %B, %Y") %></dd>
 </dl>
@@ -48,17 +60,28 @@
 	</div>
 <% end %>
 
-<h2>Notes</h2>
-<% @enrollment.notes.each do |note| %>
-	<% unless note.new_record? %>
-		<div class='note'>
-			<div class='note-content'>
-				<%= simple_format(note.content) %>
+<% if @enrollment.notes.count > 0 %>
+	<h2>Notes</h2>
+	<% @enrollment.notes.each do |note| %>
+		<% unless note.new_record? %>
+			<div class='note'>
+				<div class='note-content'>
+					<%= simple_format(note.content) %>
+				</div>
+				<div class='note-information'>Posted <span><%= time_ago_in_words(note.created_at) %> ago</span> by <span><%= note.user.full_name %></span>
+					<% if current_user.is_staff? %>
+						 | <%= link_to "Delete Note", note, :method => :delete, :confirm => "Are you sure?" %>
+					<% end %>
+				</div>
 			</div>
-			<div class='note-information'>Posted <span><%= time_ago_in_words(note.created_at) %> ago</span> by <span><%= note.user.full_name %></span> | <%= link_to "Delete Note", note, :method => :delete, :confirm => "Are you sure?" %></div>
-		</div>
+		<% end %>
 	<% end %>
 <% end %>
-<%= render :partial => 'notes/form' %>
+<% if current_user.is_staff? %>
+	<% if @enrollment.notes.count == 0 %>
+		<h2>Notes</h2>
+	<% end %>
+	<%= render :partial => 'notes/form' %>
+<% end %>
 
 <%= render :partial => 'sidebar' %>

@@ -9,7 +9,10 @@
 			<li><%= link_to "Faculty Assignments", user_faculty_assignments_path(@user) %></li>
 		<% end %>
 	</ul>
-	<h2>Actions</h2>
-	<%= link_to "Switch Users", users_path, :class => :button %>
-	<%= link_to 'Delete User', @user, :confirm => 'Are you sure?', :method => :delete, :class => :button %>
+	<% if current_user.is_admin? %>
+		<h2>Actions</h2>
+		<%= link_to "Switch Users", users_path, :class => :button %>
+		<%= link_to 'Delete User', @user, :confirm => 'Are you sure?', :method => :delete, :class => :button %>
+	<% end %>
+	
 <% end %>

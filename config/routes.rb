@@ -1,7 +1,14 @@
 SARMS::Application.routes.draw do
   get "dashboard" => "dashboard#index", :as => "dashboard"
 
-  resources :faculty_assignments
+  resources :faculty_assignments do
+    resources :activities, :shallow => true do
+        resources :attendances, :shallow => true
+      end
+    resources :assessments, :shallow => true do
+      resources :performances, :shallow => true
+    end
+  end
   resources :performances
   resources :at_risk_events do
     collection do

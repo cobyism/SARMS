@@ -1,21 +1,30 @@
+<% if current_user.is_admin? %>
+	<% if @user %>
+		<div class="trb">
+			<%= link_to 'New Faculty assignment', new_user_faculty_assignment_path(@user), :class => :button %>
+		</div>
+	<% elsif @unit %>
+		<div class="trb">
+			<%= link_to 'New Faculty assignment', new_unit_faculty_assignment_path(@unit), :class => :button %>
+		</div>
+	<% end %>
+<% end %>
+
 <% if @user %>
-	<div class="trb">
-		<%= link_to 'New Faculty assignment', new_user_faculty_assignment_path(@user), :class => :button %>
-	</div>
 	<h1>Faculty Assignments for <%= @user.full_name %></h1>
 <% elsif @unit %>
-	<div class="trb">
-		<%= link_to 'New Faculty assignment', new_unit_faculty_assignment_path(@unit), :class => :button %>
-	</div>
 	<h1>Faculty Assignments for <%= @unit.code %></h1>
 <% end %>
 
 <table>
 <% @faculty_assignments.each do |faculty_assignment| %>
   <tr class='separator'>
+	<td>
+		<span style='font-size: 16px; font-weight: bold; padding-right: 10px;'><%= faculty_assignment.unit.code %></span>
+	</td>
     <td>
 		<% if @user %>
-			<%= faculty_assignment.unit.full_name %><br />
+			<%= faculty_assignment.unit.name %><br />
 			<%= faculty_assignment.unit.trimester %>
 		<% elsif @unit %>
 			<%= faculty_assignment.user.full_name %>
@@ -23,8 +32,13 @@
 	</td>
 	<td><%= faculty_assignment.created_at.strftime("Assigned %e %B, %Y") %></td>
     <td class='actions'>
-		<%= link_to 'View Faculty Assignment', faculty_assignment, :class => :button %>
-		<%= link_to 'Delete', faculty_assignment, :confirm => 'Are you sure?', :method => :delete, :class => :button %>
+		<% if current_user.is_staff? && current_user.id == faculty_assignment.user.id %>
+			<%= link_to 'Manage Unit', unit_path(faculty_assignment.unit), :class => :button %>
+		<% end %>
+		<% if current_user.is_admin? %>
+			<%= link_to 'View Faculty', faculty_assignment.user, :class => :button %>
+			<%= link_to 'Delete', faculty_assignment, :confirm => 'Are you sure?', :method => :delete, :class => :button %>
+		<% end %>
 	</td>
   </tr>
 <% end %>

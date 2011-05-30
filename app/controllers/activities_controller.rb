@@ -2,6 +2,7 @@ class ActivitiesController < ApplicationController
   
   before_filter :find_activity, :except => [:index, :new, :create]
   before_filter :find_unit
+  before_filter :set_tab
   
   # GET /activities
   # GET /activities.xml
@@ -99,5 +100,9 @@ class ActivitiesController < ApplicationController
         @unit = nil
       end
     end
+  end
+  
+  def set_tab
+    @tab = 'units'
   end
 end

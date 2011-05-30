@@ -1,6 +1,7 @@
 class AtRiskEventsController < ApplicationController
   
   before_filter :find_enrollment, :only => [:new, :create]
+  before_filter :set_tab
   
   # GET /at_risk_events
   # GET /at_risk_events.xml
@@ -17,6 +18,9 @@ class AtRiskEventsController < ApplicationController
   # GET /at_risk_events.xml
   def monitor
     @units = Unit.all
+    if current_user.is_faculty?
+      @units = current_user.units.all
+    end
     @at_risk_event = AtRiskEvent.new
 
     respond_to do |format|
@@ -102,5 +106,9 @@ class AtRiskEventsController < ApplicationController
     if params[:enrollment_id]
       @enrollment = Enrollment.find(params[:enrollment_id])
     end
+  end
+  
+  def set_tab
+    @tab = 'at_risk_events'
   end
 end

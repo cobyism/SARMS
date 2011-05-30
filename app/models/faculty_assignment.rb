@@ -4,6 +4,10 @@ class FacultyAssignment < ActiveRecord::Base
 
   validates_presence_of :user_id, :unit_id
   validates_uniqueness_of :user_id, :scope => :unit_id, :message => "is already assigned to this unit"
+  
+  def full_name
+    "#{self.user.full_name} → #{self.unit.code}"
+  end
 
   def user_name
     User.find(self.user_id).full_name

@@ -5,6 +5,7 @@ class EnrollmentsController < ApplicationController
   before_filter :find_unit
   before_filter :find_units, :only => [:new, :create]
   before_filter :find_users, :only => [:new, :create]
+  before_filter :set_tab
   
   # GET /enrollments
   # GET /enrollments.xml
@@ -113,6 +114,22 @@ class EnrollmentsController < ApplicationController
       else
         @unit = nil
       end
+    end
+  end
+  
+  def set_tab
+    if @user
+      if current_user.id == @user.id
+        @tab = 'units'
+      else
+        if current_user.is_staff?
+          @tab = 'units'
+        else
+          @tab = 'users'
+        end
+      end
+    else
+      @tab = 'units'
     end
   end
 end

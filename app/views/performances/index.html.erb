@@ -1,4 +1,9 @@
+<div class="trb">
+	<%= link_to "Back", :back, :class => :button %>
+</div>
+
 <% if @enrollment %>
+
 	<h1>Assessment Results</h1>
 
 	<table>
@@ -13,19 +18,21 @@
 			</td>
 			<td>
 				<% if @performance %>
-					<%= @performance.grade_in_words %>
+					<%= @performance.result %><br />
+					<strong><%= @performance.grade_in_words %></strong>
 				<% else %>
-					Not completed
+					<strong>Not completed</strong>
 				<% end %>
 			</td>
-		    <td class='actions'>
-				<% if @performance %>
-					<%= @performance.result %>
-					<%= link_to 'Remove Result', @performance, :confirm => 'Are you sure?', :method => :delete, :class => :button %>
-				<% else %>
-					<%= link_to "Enter Marks", new_performance_path(:assessment_id => assessment.id, :enrollment_id => @enrollment.id, :from => 'enrollment'), :class => :button %>
-				<% end %>
-			</td>
+			<% if current_user.is_staff? %>
+			    <td class='actions'>
+					<% if @performance %>
+						<%= link_to 'Remove Result', @performance, :confirm => 'Are you sure?', :method => :delete, :class => :button %>
+					<% else %>
+						<%= link_to "Enter Marks", new_performance_path(:assessment_id => assessment.id, :enrollment_id => @enrollment.id, :from => 'enrollment'), :class => :button %>
+					<% end %>
+				</td>
+			<% end %>
 		  </tr>
 		<% end %>
 	</table>
@@ -46,14 +53,14 @@
 			</td>
 			<td>
 				<% if @performance %>
-					<%= @performance.grade_in_words %>
+					<%= @performance.result %><br />
+					<strong><%= @performance.grade_in_words %></strong>
 				<% else %>
-					Not completed
+					<strong>Not completed</strong>
 				<% end %>
 			</td>
 		    <td class='actions'>
 				<% if @performance %>
-					<%= @performance.result %>
 					<%= link_to 'Remove Result', @performance, :method => :delete, :confirm => 'Are you sure?', :class => :button %>
 				<% else %>
 					<%= link_to "Enter Marks", new_performance_path(:assessment_id => @assessment.id, :enrollment_id => enrollment.id, :from => 'assessment'), :class => :button %>

@@ -1,13 +1,18 @@
-<p id="notice"><%= notice %></p>
+<% if current_user.is_admin? %>
+	<div class="trb">
+		<%= link_to "Edit", edit_unit_path(@unit), :class => :button %>
+	</div>	
+<% end %>
 
-<p>
-  <b>User:</b>
-  <%= @faculty_assignment.user_id %>
-</p>
+<h1><%= @unit.full_name %></h1>
 
-<p>
-  <b>Unit:</b>
-  <%= @faculty_assignment.unit_id %>
-</p>
+<dl>
+	<dt>Begins on</dt>
+    <dd><%= @unit.begins_at.strftime("%A, %e %B") %></dd>
+	<dt>Ends on</dt>
+    <dd><%= @unit.ends_at.strftime("%A, %e %B") %></dd>
+	<dt>Trimester</dt>
+    <dd><%= @unit.trimester %></dd>
+</dl>
 
-<%= render :partial => 'users/sidebar' %>
+<%= render :partial => 'sidebar' %>

@@ -6,6 +6,7 @@ class AttendancesController < ApplicationController
   before_filter :find_enrollments
   before_filter :find_activities
   before_filter :find_unit
+  before_filter :set_tab
   
   # GET /attendances
   # GET /attendances.xml
@@ -144,5 +145,9 @@ class AttendancesController < ApplicationController
     if @activity
       @unit = @activity.unit
     end
+  end
+  
+  def set_tab
+    @tab = 'units'
   end
 end

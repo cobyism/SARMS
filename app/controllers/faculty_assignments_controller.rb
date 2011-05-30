@@ -5,6 +5,7 @@ class FacultyAssignmentsController < ApplicationController
   before_filter :find_unit
   before_filter :find_users, :only => [:new, :create]
   before_filter :find_units, :only => [:new, :create]
+  before_filter :set_tab
   
   # GET /faculty_assignments
   # GET /faculty_assignments.xml
@@ -113,6 +114,18 @@ class FacultyAssignmentsController < ApplicationController
       else
         @unit = nil
       end
+    end
+  end
+  
+  def set_tab
+    if @user
+      if current_user.id == @user.id
+        @tab = 'units'
+      else
+        @tab = 'users'
+      end
+    else
+      @tab = 'units'
     end
   end
   

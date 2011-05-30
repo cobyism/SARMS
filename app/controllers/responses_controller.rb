@@ -1,6 +1,7 @@
 class ResponsesController < ApplicationController
   
   before_filter :find_at_risk_event
+  before_filter :set_tab
   
   # GET /responses
   # GET /responses.xml
@@ -93,5 +94,9 @@ class ResponsesController < ApplicationController
       @at_risk_event = AtRiskEvent.find(params[:at_risk_event_id])
       @enrollment = @at_risk_event.enrollment
     end
+  end
+  
+  def set_tab
+    @tab = 'units'
   end
 end

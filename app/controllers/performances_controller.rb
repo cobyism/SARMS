@@ -6,6 +6,7 @@ class PerformancesController < ApplicationController
   before_filter :find_assessment
   before_filter :find_assessments
   before_filter :find_unit
+  before_filter :set_tab
   
   # GET /performances
   # GET /performances.xml
@@ -98,7 +99,9 @@ class PerformancesController < ApplicationController
   private
   
   def find_performance
-    @performance = Performance.find(params[:id])
+    if params[:id] != 'new'
+      @performance = Performance.find(params[:id])
+    end
   end
     
   def find_enrollment
@@ -143,5 +146,9 @@ class PerformancesController < ApplicationController
     if @assessment
       @unit = @assessment.unit
     end
+  end
+  
+  def set_tab
+    @tab = 'units'
   end
 end

@@ -1,6 +1,8 @@
-<div class="trb">
-	<%= link_to "Edit", edit_unit_path(@unit), :class => :button %>
-</div>
+<% if current_user.is_admin? %>
+	<div class="trb">
+		<%= link_to "Edit", edit_unit_path(@unit), :class => :button %>
+	</div>
+<% end %>
 
 <h1><%= @unit.full_name %></h1>
 

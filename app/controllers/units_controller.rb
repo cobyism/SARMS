@@ -1,4 +1,7 @@
 class UnitsController < ApplicationController
+  
+  before_filter :set_tab
+  
   # GET /units
   # GET /units.xml
   def index
@@ -93,5 +96,11 @@ class UnitsController < ApplicationController
       format.html { redirect_to(units_url) }
       format.xml  { head :ok }
     end
+  end
+  
+  private
+  
+  def set_tab
+    @tab = 'units'
   end
 end

@@ -2,6 +2,7 @@ class AssessmentsController < ApplicationController
   
   before_filter :find_assessment, :except => [:index, :new, :create]
   before_filter :find_unit
+  before_filter :set_tab
   
   # GET /assessments
   # GET /assessments.xml
@@ -104,5 +105,9 @@ class AssessmentsController < ApplicationController
         @unit = nil
       end
     end
+  end
+  
+  def set_tab
+    @tab = 'units'
   end
 end

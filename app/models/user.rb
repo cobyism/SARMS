@@ -1,6 +1,8 @@
 class User < ActiveRecord::Base
   has_many :enrollments, :dependent => :destroy
   has_many :faculty_assignments, :dependent => :destroy
+  has_many :units, :through => :enrollments
+  has_many :units, :through => :faculty_assignments
   attr_accessible :email, :password, :password_confirmation, :firstname, :lastname, :is_active, :is_faculty, :is_admin, :title, :exam_location, :course_code, :address, :phone, :mobile
 
   attr_accessor :password
@@ -12,7 +14,6 @@ class User < ActiveRecord::Base
 
   validates_presence_of :firstname, :lastname, :email
   validates_format_of :email, :with => /^([^\s]+)((?:[-a-z0-9]\.)[a-z]{2,})$/i
-  validates_inclusion_of :is_admin, :in => %w( false ), :message => "must be false for all students", :if => proc { |user| !user.is_faculty? && user.is_admin? }
 
   named_scope :students, :conditions => { :is_admin => false, :is_faculty => false }
   named_scope :faculty, :conditions => { :is_admin => false, :is_faculty => true }
@@ -30,6 +31,18 @@ class User < ActiveRecord::Base
   
   def is_student?
     !self.is_faculty
+  end
+  
+  def is_faculty?
+    self.is_faculty && !self.is_admin
+  end
+  
+  def is_staff?
+    self.is_faculty
+  end
+  
+  def is_admin?
+    self.is_admin
   end
 
   def status

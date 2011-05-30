@@ -1,35 +1,67 @@
-<h1>Notifications and Responses</h1>
-
-<h2>Response Pending</h2>
-<table>
-<% @at_risk_events.each do |at_risk_event| %>
-	<% if !at_risk_event.response_received? %>
-		<tr class='separator'>
-			<td>
-				<%= at_risk_event.enrollment.full_name %>
-			</td>
-			<td>Notified <%= time_ago_in_words(at_risk_event.created_at) %> ago
-			<td class='actions'>
-				<%= link_to 'View Enrollment', at_risk_event.enrollment, :class => :button %>
-			</td>
-		</tr>
-	<% end %>
-<% end %>
-</table>
+<h1>Notification Responses</h1>
 
 <h2>Response Received</h2>
 <table>
 <% @at_risk_events.each do |at_risk_event| %>
-	<% if at_risk_event.response_received? %>
-		<tr class='separator'>
-			<td>
-				<%= at_risk_event.enrollment.full_name %>
-			</td>
-			<td>Responded <%= time_ago_in_words(at_risk_event.responses.first.created_at) %> ago</td>
-			<td class='actions'>
-				<%= link_to 'View Enrollment', at_risk_event.enrollment, :class => :button %>
-			</td>
-		</tr>
+	<% if current_user.is_faculty? %>
+		<% if at_risk_event.enrollment.unit.faculty_assignments.find_by_user_id(current_user.id) %>
+			<% if at_risk_event.response_received? %>
+				<tr class='separator'>
+					<td>
+						<%= at_risk_event.enrollment.full_name %>
+					</td>
+					<td>Responded <%= time_ago_in_words(at_risk_event.responses.first.created_at) %> ago</td>
+					<td class='actions'>
+						<%= link_to 'View Enrollment', at_risk_event.enrollment, :class => :button %>
+					</td>
+				</tr>
+			<% end %>
+		<% end %>
+	<% else %>
+		<% if at_risk_event.response_received? %>
+			<tr class='separator'>
+				<td>
+					<%= at_risk_event.enrollment.full_name %>
+				</td>
+				<td>Responded <%= time_ago_in_words(at_risk_event.responses.first.created_at) %> ago</td>
+				<td class='actions'>
+					<%= link_to 'View Enrollment', at_risk_event.enrollment, :class => :button %>
+				</td>
+			</tr>
+		<% end %>
+	<% end %>
+<% end %>
+</table>
+
+<h2>Response Pending</h2>
+<table>
+<% @at_risk_events.each do |at_risk_event| %>
+	<% if current_user.is_faculty? %>
+		<% if at_risk_event.enrollment.unit.faculty_assignments.find_by_user_id(current_user.id) %>
+			<% if !at_risk_event.response_received? %>
+				<tr class='separator'>
+					<td>
+						<%= at_risk_event.enrollment.full_name %>
+					</td>
+					<td>Notified <%= time_ago_in_words(at_risk_event.created_at) %> ago
+					<td class='actions'>
+						<%= link_to 'View Enrollment', at_risk_event.enrollment, :class => :button %>
+					</td>
+				</tr>
+			<% end %>
+		<% end %>
+	<% else %>
+		<% if !at_risk_event.response_received? %>
+			<tr class='separator'>
+				<td>
+					<%= at_risk_event.enrollment.full_name %>
+				</td>
+				<td>Notified <%= time_ago_in_words(at_risk_event.created_at) %> ago
+				<td class='actions'>
+					<%= link_to 'View Enrollment', at_risk_event.enrollment, :class => :button %>
+				</td>
+			</tr>
+		<% end %>
 	<% end %>
 <% end %>
 </table>

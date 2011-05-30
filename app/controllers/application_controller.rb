@@ -11,4 +11,12 @@ class ApplicationController < ActionController::Base
   def authenticate_user!
     redirect_to sign_in_path unless current_user
   end
+  
+  def is_student?
+    !current_user.is_faculty
+  end
+  
+  def is_faculty?
+    current_user.is_faculty?
+  end
 end

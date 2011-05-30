@@ -1,4 +1,16 @@
-== Welcome to Rails
+== Welcome to SARMS
+
+The Student At-Risk Monitoring System...
+
+- Link to App
+- sample login details
+	- student
+	- faculty member
+	- admin
+
+link to user manual PDF
+
+source code zip/github url
 
 Rails is a web-application framework that includes everything needed to create
 database-backed web applications according to the Model-View-Control pattern.

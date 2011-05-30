@@ -8,6 +8,10 @@
 		<li><%= link_to "Assessments", unit_assessments_path(@unit) %></li>
 	</ul>
 	<h2>Actions</h2>
-	<%= link_to "Switch Units", units_path, :class => :button %>
-	<%= link_to 'Delete Unit', @unit, :confirm => 'Are you sure?', :method => :delete, :class => :button %>
+	<% if current_user.is_admin? %>
+		<%= link_to "Switch Units", units_path, :class => :button %>
+		<%= link_to 'Delete Unit', @unit, :confirm => 'Are you sure?', :method => :delete, :class => :button %>
+	<% elsif current_user.is_faculty? %>
+		<%= link_to "Switch Units", user_faculty_assignments_path(current_user), :class => :button %>
+	<% end %>
 <% end %>

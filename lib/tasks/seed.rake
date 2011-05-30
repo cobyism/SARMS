@@ -10,7 +10,7 @@ namespace :db do
     # Email: admin@sarms.com
     # Password: admin
     admin = User.new(
-      :email => "admin@sarms.com",
+      :email => "admin@deakin.edu.au",
       :password => "admin",
       :password_confirmation => "admin",
       :firstname => Faker::Name.first_name,
@@ -33,7 +33,7 @@ namespace :db do
     # Email: student@sarms.com
     # Password: student
     student = User.new(
-      :email => "student@sarms.com",
+      :email => "student@deakin.edu.au",
       :password => "student",
       :password_confirmation => "student",
       :is_active => true,
@@ -60,7 +60,7 @@ namespace :db do
     # Email: faculty@sarms.com
     # Password: faculty
     faculty = User.new(
-      :email => "faculty@sarms.com",
+      :email => "faculty@deakin.edu.au",
       :password => "faculty",
       :password_confirmation => "faculty",
       :is_active => true,

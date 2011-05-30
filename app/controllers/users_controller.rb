@@ -3,6 +3,7 @@ class UsersController < ApplicationController
   # GET /users.xml
   
   before_filter :authenticate_user!
+  before_filter :set_tab
 
   def index
     per_page = 10
@@ -57,6 +58,18 @@ class UsersController < ApplicationController
   # POST /users.xml
   def create
     @user = User.new(params[:user])
+    role = params[:user][:role]
+    
+    if role == 'Student'
+      @user.is_faculty = false
+      @user.is_admin = false
+    elsif role == 'Faculty'
+      @user.is_faculty = true
+      @user.is_admin = false
+    elsif role == 'Administrator'
+      @user.is_faculty = true
+      @user.is_admin = true
+    end
 
     respond_to do |format|
       if @user.save
@@ -74,10 +87,21 @@ class UsersController < ApplicationController
   def update
     @user = User.find(params[:id])
     role = params[:user][:role]
+    
+    if role == 'Student'
+      @user.is_faculty = false
+      @user.is_admin = false
+    elsif role == 'Faculty'
+      @user.is_faculty = true
+      @user.is_admin = false
+    elsif role == 'Administrator'
+      @user.is_faculty = true
+      @user.is_admin = true
+    end
 
     respond_to do |format|
       if @user.update_attributes(params[:user])
-        format.html { redirect_to(@user, :notice => "User was successfully updated.#{role}") }
+        format.html { redirect_to(@user, :notice => "User was successfully updated.") }
         format.xml  { head :ok }
       else
         format.html { render :action => "edit" }
@@ -95,6 +119,14 @@ class UsersController < ApplicationController
     respond_to do |format|
       format.html { redirect_to(users_url) }
       format.xml  { head :ok }
+    end
+  end
+  
+  def set_tab
+    if current_user.is_admin
+      @tab = 'users'
+    else
+      @tab = 'my_account'
     end
   end
 end
