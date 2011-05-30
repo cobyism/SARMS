@@ -46,14 +46,12 @@
                   <div class="navitem <%= current_if('dashboard') %>"><%= link_to "Dashboard", root_path %></div>
 				</div>
 				<div class="grid2">
-					<div class="navitem <%= current_if('my_account') %>"><%= link_to "My Account", user_path(current_user) %></div>
-				</div>
-				<% if current_user.is_admin? %>
-					<div class="grid2">
+					<% if current_user.is_admin? %>
 						<div class="navitem <%= current_if('users') %>"><%= link_to "Users", users_path %></div>
+					<% else %>
+						<div class="navitem <%= current_if('my_account') %>"><%= link_to "My Account", user_path(current_user) %></div>
 					<% end %>
 				</div>
-				
 				<div class="grid2">
 					<% if current_user.is_admin? %>
 						<div class="navitem <%= current_if('units') %>"><%= link_to "Units", units_path %></div>
