@@ -109,6 +109,8 @@ padding: 6px 10px;
 -webkit-border-radius: 2px 2px;
 border: solid 1px rgb(153, 153, 153);
 background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(rgb(255, 255, 255)), to(rgb(221, 221, 221)));
+background: -moz-linear-gradient(top,  rgb(255, 255, 255), rgb(221, 221, 221));
+filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffff', endColorstr='#dddddd');
 color: #333;
 text-decoration: none;
 cursor: pointer;

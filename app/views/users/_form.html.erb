@@ -77,11 +77,11 @@
 	    <%= f.label :role, "Role" %><br />
 	    <%= f.select :role, [['Student'], ['Faculty'], ['Administrator']] %>
 	  </div>
+	  <div class="field">
+	    <%= f.label :is_active, "Status" %><br />
+	    <%= f.select :is_active, [['Active', true], ['Suspended', false]] %>
+	  </div>
 	<% end %>
-  <div class="field">
-    <%= f.label :is_active, "Status" %><br />
-    <%= f.select :is_active, [['Active', true], ['Suspended', false]] %>
-  </div>
   <div class="field">
     <%= f.label :password %><br />
     <%= f.password_field :password %>
