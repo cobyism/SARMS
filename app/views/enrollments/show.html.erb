@@ -11,9 +11,9 @@
 	<dt>Unit</dt>
 	<dd>
 		<% if current_user.is_admin? %>
-			<%= link_to @enrollment.unit.code, @enrollment.unit %>
+			<%= link_to @enrollment.unit.full_name, @enrollment.unit %>
 		<% else %>
-			<%= @enrollment.unit.code %>
+			<%= @enrollment.unit.full_name %>
 		<% end %>
 	</dd>
 	<dt>Enrolled on</dt>

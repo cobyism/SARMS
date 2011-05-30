@@ -1,8 +1,38 @@
-<h3>Users (<%= link_to "#{@count[:users]} total", users_path %>)</h3>
-<ul>
-	<li><%= link_to "#{@count[:students]} Students", users_path(:scope => 'students') %></li>
-	<li><%= link_to "#{@count[:faculty]} Faculty Members", users_path(:scope => 'faculty') %></li>
-	<li><%= link_to "#{@count[:admins]} Administrators", users_path(:scope => 'admins') %></li>
-</ul>
-
-<h3>Units (<%= link_to "#{@count[:units]} total", units_path %>)</h3>
+<table>
+		<% current_user.enrollments.each do |e| %>
+			<tr class='separator'>
+				<td>
+					<h2><%= e.unit.full_name %></h2>
+					<ul>
+						<li>Performance Average: <%= e.performance_percentage %>% &mdash; <%= grade_in_words(e.performance_percentage) %></li>
+						<li>Attendance: <%= e.attendance_count %> / <%= e.unit.activities.count %> Activities</li>
+						<% @enrollment = e %>
+						<% if @enrollment.at_risk_events.count > 0 %>
+							<% @at_risk_event = @enrollment.at_risk_events.first %>
+							<li class='attention'>
+								<strong>Attention:</strong> This enrollment has been deemed to be at-risk!
+								<ul>
+									<% @enrollment.at_risk_reasons.each do |r| %>
+										<li><%= r %></li>
+									<% end %>
+								</ul>
+							</li>
+						<% elsif @enrollment.is_at_risk? %>
+							<li class='warning'>
+								<strong>Warning:</strong>
+								<ul>
+									<% @enrollment.at_risk_reasons.each do |r| %>
+										<li><%= r %></li>
+									<% end %>
+								</ul>
+							</li>
+						<% end %>
+					</ul>
+				</td>
+				<td class='actions'>
+					<%= link_to 'View Enrollment', e, :class => :button %>
+				</td>
+			</tr>
+			
+		<% end %>
+	</table>

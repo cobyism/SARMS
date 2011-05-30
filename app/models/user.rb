@@ -18,6 +18,27 @@ class User < ActiveRecord::Base
   named_scope :students, :conditions => { :is_admin => false, :is_faculty => false }
   named_scope :faculty, :conditions => { :is_admin => false, :is_faculty => true }
   named_scope :admins, :conditions => { :is_admin => true, :is_faculty => true }
+  
+  def current_gpa
+    total = 0
+    count = 0
+    self.enrollments.each do |e|
+        p = e.performance_percentage
+        if p >= 80
+          total += 7
+        elsif p >= 70
+          total += 6
+        elsif p >= 60
+          total += 5
+        elsif p >= 50
+          total += 4
+        else
+          total += 3
+        end
+        count += 1
+    end
+    total / count
+  end
 
   def role
     if self.is_admin

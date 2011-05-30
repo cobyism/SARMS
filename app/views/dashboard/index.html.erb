@@ -1,7 +1,9 @@
 <h1>Dashboard</h1>
 
-<% render 'student_dashboard' if current_user.is_student? %>
-<% render 'faculty_dashboard' if current_user.is_faculty? %>
-<% render 'admin_dashboard' if current_user.is_admin? %>
-
-<%= render :partial => 'admin_dashboard' %>
+<% if current_user.is_admin? %>
+	<%= render :partial => 'admin_dashboard' %>
+<% elsif current_user.is_faculty? %>
+	<%= render :partial => 'faculty_dashboard' %>
+<% elsif current_user.is_student? %>
+	<%= render :partial => 'student_dashboard' %>
+<% end %>

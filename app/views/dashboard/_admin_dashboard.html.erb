@@ -1,8 +1,23 @@
-<h3>Users (<%= link_to "#{@count[:users]} total", users_path %>)</h3>
+<h2>Users (<%= link_to "#{User.all.count} total", users_path %>)</h2>
 <ul>
-	<li><%= link_to "#{@count[:students]} Students", users_path(:scope => 'students') %></li>
-	<li><%= link_to "#{@count[:faculty]} Faculty Members", users_path(:scope => 'faculty') %></li>
-	<li><%= link_to "#{@count[:admins]} Administrators", users_path(:scope => 'admins') %></li>
+	<li><%= link_to "#{User.students.count} Students", users_path(:scope => 'students') %></li>
+	<li><%= link_to "#{User.faculty.count} Faculty", users_path(:scope => 'faculty') %></li>
+	<li><%= link_to "#{User.admins.count} Administrators", users_path(:scope => 'admins') %></li>
 </ul>
 
-<h3>Units (<%= link_to "#{@count[:units]} total", units_path %>)</h3>
+<h2>Enrollments (<%= Enrollment.count %> enrollments in <%= link_to "#{Unit.count} units", units_path %>)</h2>
+<ul>
+	<li>
+		<h3><%= link_to "#{@at_risk_count} enrollments", monitor_at_risk_events_path %> are at risk</h3>
+		<ul>
+			<li>
+				<h4><%= link_to "#{@at_risk_notified} students", at_risk_events_path %> have been notified</h4>
+				<ul>
+					<li><%= @at_risk_responded %> with a response</li>
+					<li><%= @at_risk_not_responded %> with no response</li>
+				</ul>
+			</li>
+			<li><h4><%= link_to "#{@at_risk_not_notified} students", monitor_at_risk_events_path %> have not been notified</h4></li>
+		</ul>
+	</li>
+</ul>

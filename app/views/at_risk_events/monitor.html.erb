@@ -2,7 +2,7 @@
 
 <% @units.each do |u| %>
 	<% if u.has_students_at_risk? %>
-		<h2><%= link_to u.code, u %> (<%= pluralize(u.number_of_students_at_risk, "student") %>  at-risk)</h2>
+		<h2><%= link_to u.full_name, u %> (<%= pluralize(u.number_of_students_at_risk, "student") %>  at-risk)</h2>
 		<table>
 			<% u.enrollments.each do |e| %>
 				<% if e.is_at_risk? %>
@@ -21,6 +21,7 @@
 							<%= link_to 'Cancel Notification', get_at_risk_event(e), :method => :delete, :class => :button %>
 						<% else %>
 							<% @at_risk_event.enrollment_id = e.id %>
+							<% @enrollment_link = e %>
 							<%= render 'form' %>
 						<% end %>
 					</td>

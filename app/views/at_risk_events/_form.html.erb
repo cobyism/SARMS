@@ -11,6 +11,6 @@
     </div>
   <% end %>
     <%= f.hidden_field :enrollment_id %>
-	<%= link_to "View Enrollment", @at_risk_event.enrollment, :class => :button %>
+	<%= link_to "View Enrollment", @enrollment_link, :class => :button %>
     <%= f.submit 'Notify', :class => :button %>
 <% end %>

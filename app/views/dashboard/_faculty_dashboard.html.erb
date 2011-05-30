@@ -1,8 +1,16 @@
-<h3>Users (<%= link_to "#{@count[:users]} total", users_path %>)</h3>
-<ul>
-	<li><%= link_to "#{@count[:students]} Students", users_path(:scope => 'students') %></li>
-	<li><%= link_to "#{@count[:faculty]} Faculty Members", users_path(:scope => 'faculty') %></li>
-	<li><%= link_to "#{@count[:admins]} Administrators", users_path(:scope => 'admins') %></li>
-</ul>
-
-<h3>Units (<%= link_to "#{@count[:units]} total", units_path %>)</h3>
+<table>
+	<% current_user.faculty_assignments.each do |f| %>
+		<tr class='separator'>
+			<td>
+				<h2><%= f.unit.full_name %></h2>
+				<ul>
+					<li>Average student performance: <%= f.unit.average_percentage %>% &mdash; <%= grade_in_words(f.unit.average_percentage) %></li>
+					<li>Average attendance: <%= f.unit.average_attendance_count %> / <%= f.unit.activities.count %> students</li>
+				</ul>
+			</td>
+			<td class='actions'>
+				<%= link_to 'Manage Unit', f.unit, :class => :button %>
+			</td>
+		</tr>
+	<% end %>
+</table>

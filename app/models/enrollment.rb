@@ -9,6 +9,24 @@ class Enrollment < ActiveRecord::Base
   validates_presence_of :user_id, :unit_id
   validates_uniqueness_of :user_id, :scope => :unit_id, :message => "is already enrolled in this unit"
   
+  def attendance_count
+    self.attendances.count
+  end
+  
+  def attendance_percentage
+    self.attendance_count / self.unit.activities.count * 100
+  end
+  
+  def performance_percentage
+    total = 0
+    count = 0
+    self.performances.each do |p|
+      total += p.percentage
+      count += 1
+    end
+    total / count
+  end
+  
   def user_name
     User.find(self.user_id).full_name if User.find(self.user_id)
   end

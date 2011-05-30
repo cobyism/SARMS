@@ -7,6 +7,28 @@ class Unit < ActiveRecord::Base
   
   validates_presence_of :code, :name, :begins_at, :ends_at, :term
   
+  def average_percentage
+    total = 0
+    count = 0
+    self.enrollments.each do |e|
+      e.performances.each do |p|
+        total += p.percentage
+        count += 1
+      end
+    end
+    total / count
+  end
+  
+  def average_attendance_count
+    total = 0
+    count = 0
+    self.activities.each do |a|
+      total += a.attendances.count
+      count += 1
+    end
+    total / count
+  end
+  
   def full_name
     "#{self.code}—#{self.name}"
   end

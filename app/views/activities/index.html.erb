@@ -6,8 +6,11 @@
 <table>
 <% @activities.each do |activity| %>
   <tr class='separator'>
-    <td><%= activity.name %></td>
-    <td><%= activity.date.strftime("%A, %e %b %Y") %></td>
+    <td>
+		<strong><%= activity.name %></strong><br />
+		<%= activity.date.strftime("%A, %e %b %Y") %>
+	</td>
+	<td><%= activity.attendances.count %> / <%= activity.unit.enrollments.count %> students</td>
     <td class='actions'>
 		<%= link_to 'View Attendance', activity_attendances_path(activity), :class => :button %>
 		<%= link_to 'Edit', edit_activity_path(activity), :class => :button %>
