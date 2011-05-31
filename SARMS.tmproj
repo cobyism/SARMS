@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>currentDocument</key>
-	<string>app/views/performances/index.html.erb</string>
+	<string>README</string>
 	<key>documents</key>
 	<array>
 		<dict>
@@ -13,6 +13,8 @@
 			<string>SARMS</string>
 			<key>regexFolderFilter</key>
 			<string>!.*/(\.[^/]*|CVS|_darcs|_MTN|\{arch\}|blib|.*~\.nib|.*\.(framework|app|pbproj|pbxproj|xcode(proj)?|bundle))$</string>
+			<key>selected</key>
+			<true/>
 			<key>sourceDirectory</key>
 			<string></string>
 		</dict>
@@ -21,33 +23,19 @@
 	<integer>291</integer>
 	<key>metaData</key>
 	<dict>
-		<key>app/controllers/performances_controller.rb</key>
-		<dict>
-			<key>caret</key>
-			<dict>
-				<key>column</key>
-				<integer>56</integer>
-				<key>line</key>
-				<integer>131</integer>
-			</dict>
-			<key>firstVisibleColumn</key>
-			<integer>0</integer>
-			<key>firstVisibleLine</key>
-			<integer>104</integer>
-		</dict>
-		<key>app/views/performances/index.html.erb</key>
+		<key>README</key>
 		<dict>
 			<key>caret</key>
 			<dict>
 				<key>column</key>
 				<integer>67</integer>
 				<key>line</key>
-				<integer>56</integer>
+				<integer>33</integer>
 			</dict>
 			<key>firstVisibleColumn</key>
 			<integer>0</integer>
 			<key>firstVisibleLine</key>
-			<integer>28</integer>
+			<integer>13</integer>
 		</dict>
 		<key>app/views/sessions/new.html.erb</key>
 		<dict>
@@ -80,12 +68,11 @@
 	</dict>
 	<key>openDocuments</key>
 	<array>
-		<string>app/controllers/performances_controller.rb</string>
-		<string>app/views/performances/index.html.erb</string>
+		<string>README</string>
 	</array>
 	<key>showFileHierarchyDrawer</key>
 	<true/>
 	<key>windowFrame</key>
-	<string>{{35, 27}, {778, 731}}</string>
+	<string>{{26, 27}, {778, 731}}</string>
 </dict>
 </plist>
