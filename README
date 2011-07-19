@@ -1,6 +1,6 @@
 == Welcome to SARMS
 
-The Student At-Risk Monitoring System (SARMS) was created by Coby Chapple, Lee Manuele, Fin McCarthy for SIT321 at Deakin University. It is a web-based application that allows students, faculty, and administrators to view, manage and monitor the at-risk status of students in an education system, in addition to providing a means for tracking student attendance and performance information.
+The Student At-Risk Monitoring System (SARMS) was created by Coby Chapple for SIT321 at Deakin University. It is a web-based application that allows students, faculty, and administrators to view, manage and monitor the at-risk status of students in an education system, in addition to providing a means for tracking student attendance and performance information.
 
 
 == Accessing SARMS
@@ -42,7 +42,7 @@ http://github.com/cobychapple/SARMS
 
 == Credits
 
-SARMS was created by Coby Chapple, Lee Manuele, Fin McCarthy for SIT321 at Deakin University, and is licensed under a Creative Commons License. All content is copyright (c) 2011 Coby Chapple, Lee Manuele, and Fin McCarthy. 
+SARMS was created by Coby Chapple for SIT321 at Deakin University, and is licensed under a Creative Commons License. All content is copyright (c) 2011 Coby Chapple. 
 
 The Creative Commons license (BY-NC-ND) can be viewed online at the following address:
 http://creativecommons.org/licenses/by-nc-nd/3.0/
