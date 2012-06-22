@@ -4,7 +4,7 @@
 				<td>
 					<h2><%= e.unit.full_name %></h2>
 					<ul>
-						<li>Performance Average: <%= e.performance_percentage.round(2) %>% &mdash; <%= grade_in_words(e.performance_percentage) %></li>
+						<li>Performance Average: <%= e.performance_percentage %>% &mdash; <%= grade_in_words(e.performance_percentage) %></li>
 						<li>Attendance: <%= e.attendance_count %> / <%= e.unit.activities.count %> Activities</li>
 						<% @enrollment = e %>
 						<% if @enrollment.at_risk_events.count > 0 %>

@@ -4,7 +4,7 @@
 			<td>
 				<h2><%= f.unit.full_name %></h2>
 				<ul>
-					<li>Average student performance: <%= f.unit.average_percentage.round(2) %>% &mdash; <%= grade_in_words(f.unit.average_percentage) %></li>
+					<li>Average student performance: <%= f.unit.average_percentage %>% &mdash; <%= grade_in_words(f.unit.average_percentage) %></li>
 					<li>Average attendance: <%= f.unit.average_attendance_count %> / <%= f.unit.activities.count %> students</li>
 				</ul>
 			</td>
